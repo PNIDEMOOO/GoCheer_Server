@@ -13,7 +13,7 @@
 <body>
 <form name="loginForm" method="post" action="Login">
     <input name="username" />
-    <input name="password"/>
+    <input type="password" name="password"/>
     <button type="submit">login</button>
 </form>
 </body>
