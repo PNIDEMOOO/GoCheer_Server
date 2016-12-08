@@ -19,18 +19,6 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-//
-//        List user = session.createQuery("from User where username='" +username+"' and password = '"+ password + "'").list();
-//        if(user.isEmpty() || user==null){
-//            response.sendRedirect("/error.jsp");
-//        }
-//        else{
-//            HttpSession httpSession = request.getSession();
-//            httpSession.setAttribute("user", user.get(0));
-//            Cookie cookie = new Cookie("sessionId", httpSession.getId());
-//            response.addCookie(cookie);
-//            request.getRequestDispatcher("/hello.jsp").forward(request,response);
-//        }
         User user = UserDAO.getInstance().findById(username,password);
         if(user == null){
             response.sendRedirect("/error.jsp");
