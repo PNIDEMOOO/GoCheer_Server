@@ -10,6 +10,36 @@
 
 使用 GET 方法，返回的为json的`false`或`true`。其中`false`表示用户名已存在，`true`表示用户名不存在可以注册。  
 
+### `/userInfo`获取用户基本信息
+获取当前登录的用户的信息。  
+#### 调用方法：
+	gocheer.donggu.me/userInfo
+
+使用 GET 方法，返回 json。  
+
+#### 样例输出  
+##### 已登录，返回用户信息
+``` json
+{
+  "user": {
+    "score": 0,
+    "gender": true,
+    "registertime": "2016-12-03 19:43:02.0",
+    "wordsum": 0,
+    "alias": "ly",
+    "scoresum": 0,
+    "email": "lengyan@mail.com",
+    "username": "lengyan"
+  }
+}
+```
+
+##### 未登录，返回空
+``` json
+{
+  "user": null
+}
+```
 
 ## 后端架构
 ### ORM层 `/src/entity`

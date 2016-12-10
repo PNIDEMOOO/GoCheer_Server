@@ -21,9 +21,9 @@ public class Record {
         datetime=Timestamp.valueOf(LocalDateTime.now());
     }
     public Record(String word, String user){
-        Record record = new Record();
-        record.word=word;
-        record.user=user;
+        this();
+        this.word=word;
+        this.user=user;
     }
 
     @Id

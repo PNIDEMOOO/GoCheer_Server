@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="web">
+    <output-path>$PROJECT_DIR$/out/artifacts/web</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="GoCheer_Server/web/Web" />
+    </root>
+  </artifact>
+</component>

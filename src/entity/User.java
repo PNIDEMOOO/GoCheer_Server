@@ -8,13 +8,13 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
- * Created by Donggu on 2016/12/5.
+ * Created by Donggu on 2016/12/10.
  */
 @Entity
 public class User {
     private String username;
     private String password;
-    private byte gender;
+    private boolean gender;
     private String alias;
     private Timestamp registertime;
     private String email;
@@ -22,19 +22,16 @@ public class User {
     private int wordsum;
     private int scoresum;
 
-    public User() {
-        registertime = Timestamp.valueOf(LocalDateTime.now());
-    }
+    public User(){registertime = Timestamp.valueOf(LocalDateTime.now());}
 
-    public User(String username, String password, byte gender, String alias, String email) {
-        User user = new User();
-        user.username = username;
-        user.password = password;
-        user.gender = gender;
-        user.alias = alias;
-        user.email = email;
+    public User(String username, String password, boolean gender, String alias, String email) {
+        this();
+        this.username = username;
+        this.password = password;
+        this.gender = gender;
+        this.alias = alias;
+        this.email = email;
     }
-
     @Id
     @Column(name = "username", nullable = false, length = 255)
     public String getUsername() {
@@ -57,11 +54,11 @@ public class User {
 
     @Basic
     @Column(name = "gender", nullable = false)
-    public byte getGender() {
+    public boolean getGender() {
         return gender;
     }
 
-    public void setGender(byte gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 
@@ -149,7 +146,7 @@ public class User {
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (int) gender;
+        result = 31 * result + (gender ? 1 : 0);
         result = 31 * result + (alias != null ? alias.hashCode() : 0);
         result = 31 * result + (registertime != null ? registertime.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
