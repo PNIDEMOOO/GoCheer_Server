@@ -1,6 +1,7 @@
 # 枸杞后端 GoCheer_server
 > 枸杞的后端逻辑
 
+[TOC]
 ## 接口
 ### `/checkUsername`用户名查重  
 检测用户名是否已存在。
@@ -72,3 +73,11 @@
 
 ### 视图层 `/web`
 各种jsp
+
+
+## 依赖
+- JDK 1.8
+- json-simple-1.1.1
+- Hibernate 3.x
+- (JDBC) mysql-connector-java-5.1.40-bin
+- Tomcat 9.0.0.M11
