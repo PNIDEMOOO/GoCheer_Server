@@ -1,0 +1,16 @@
+.jumbotron {
+    background-image: url("../images/login_bg.png");
+    background-size: cover;
+    height: 400px;
+    padding: 0;
+}
+.jumbotron .container{
+    max-height: 480px;
+    background-color: rgba(243, 243, 243, 0.6);
+    padding:0;
+    width: 850px;
+}
+
+.form-group{
+    margin-top: 20px;
+}
