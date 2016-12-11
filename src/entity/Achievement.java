@@ -20,8 +20,12 @@ public class Achievement {
     private String condition2;
     private String image;
     private boolean hidden;
+    private int score;
 
-
+    /**
+     * generate JSONObject for achievement info
+     * @return achievement info (name,description,image,hidden  only)
+     */
     public JSONObject JSONInfo(){
         JSONObject json= new JSONObject();
         json.put("id", id);
@@ -113,6 +117,16 @@ public class Achievement {
         this.hidden = hidden;
     }
 
+    @Basic
+    @Column(name = "score", nullable = false)
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,6 +136,7 @@ public class Achievement {
 
         if (id != that.id) return false;
         if (hidden != that.hidden) return false;
+        if (score != that.score) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
@@ -142,6 +157,7 @@ public class Achievement {
         result = 31 * result + (condition2 != null ? condition2.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
         result = 31 * result + (hidden ? 1 : 0);
+        result = 31 * result + score;
         return result;
     }
 }

@@ -1,9 +1,11 @@
 package entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
- * Created by Donggu on 2016/12/5.
+ * Created by Donggu on 2016/12/11.
  */
 @Entity
 @Table(name = "achievement_user", schema = "javaEE", catalog = "")
@@ -11,9 +13,11 @@ import javax.persistence.*;
 public class AchievementUser {
     private int achievement;
     private String user;
+    private Timestamp time;
 
-    public AchievementUser(){}
+    public AchievementUser(){time=Timestamp.valueOf(LocalDateTime.now());}
     public AchievementUser(int achievement, String user){
+        this();
         this.achievement=achievement;
         this.user=user;
     }
@@ -38,6 +42,16 @@ public class AchievementUser {
         this.user = user;
     }
 
+    @Basic
+    @Column(name = "time", nullable = false)
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,6 +61,7 @@ public class AchievementUser {
 
         if (achievement != that.achievement) return false;
         if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        if (time != null ? !time.equals(that.time) : that.time != null) return false;
 
         return true;
     }
@@ -55,6 +70,7 @@ public class AchievementUser {
     public int hashCode() {
         int result = achievement;
         result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
     }
 }

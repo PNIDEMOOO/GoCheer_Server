@@ -42,6 +42,10 @@ public class User {
         this.email = email;
     }
 
+    /**
+     * generate JSONObject for user info
+     * @return user infomation (no password)
+     */
     public JSONObject JSONInfo(){
         JSONObject json = new JSONObject();
         json.put("username", username);
@@ -69,7 +73,7 @@ public class User {
             switch (a.getType()){
                 // 查询次数达到一定数量
                 case "wordsum":
-                    if(this.wordsum == Integer.parseInt(a.getCondition())){
+                    if(this.wordsum >= Integer.parseInt(a.getCondition())){
                         newAchievements.add(a.getId());
                     }
                     break;
@@ -101,7 +105,7 @@ public class User {
 
     @Basic
     @Column(name = "gender", nullable = false)
-    public boolean getGender() {
+    public boolean isGender() {
         return gender;
     }
 

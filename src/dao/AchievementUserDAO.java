@@ -39,8 +39,8 @@ public class AchievementUserDAO extends BaseDAO<AchievementUser> {
 
         ArrayList<Integer> result = new ArrayList<>();
         for(Iterator it = list.iterator();it.hasNext();){
-            Achievement a = (Achievement)it.next();
-            result.add(a.getId());
+            AchievementUser a = (AchievementUser)it.next();
+            result.add(a.getAchievement());
         }
         return result;
     }

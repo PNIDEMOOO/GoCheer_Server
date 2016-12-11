@@ -30,31 +30,40 @@ public class NewRecordServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            // 没有登录
+            JSONObject error = new JSONObject();
+            error.put("error",1);
+            error.put("message","Haven't log in");
+            response.getWriter().append(error.toJSONString());
             return;
         }
 
         String word = request.getParameter("word");
         word = word.toLowerCase();
-        Pattern exp = Pattern.compile("[a-z]+");
+        Pattern exp = Pattern.compile("([a-z]+)");
         Matcher matcher = exp.matcher(word);
         if (!matcher.find()) {
+            JSONObject error = new JSONObject();
+            error.put("error",2);
+            error.put("message","No avaliable words.");
+            response.getWriter().append(error.toJSONString());
             return;
         }
 
         // 查了一个单词才加入记录
         if (matcher.groupCount() == 1) {
-            RecordDAO.getInstance().save(new Record(matcher.group(0), user.getUsername()));
+            Record record = new Record(matcher.group(0), user.getUsername());
+            RecordDAO.getInstance().save(record);
         }
 
-        // 更新用户信息
+        // update user info
         user.setScore(user.getScore() + 1);
         user.setWordsum(user.getWordsum() + 1);
         UserDAO.getInstance().update(user);
 
-        // 查询成就
+        // check for new Achievements
         ArrayList<Integer> newAchievement = user.checkAchievement();
         JSONObject json = new JSONObject();
         JSONArray array = new JSONArray();
