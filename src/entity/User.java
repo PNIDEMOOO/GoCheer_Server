@@ -1,9 +1,7 @@
 package entity;
 
-import dao.AchievementDAO;
 import dao.AchievementUserDAO;
 import dao.BaseDAO;
-import dao.UserDAO;
 import org.json.simple.JSONObject;
 
 import javax.persistence.Basic;
@@ -15,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
 
 /**
  * Created by Donggu on 2016/12/10.

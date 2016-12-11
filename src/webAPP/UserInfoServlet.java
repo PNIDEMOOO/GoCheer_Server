@@ -35,7 +35,7 @@ public class UserInfoServlet extends HttpServlet {
             }
             else{
                 JSONObject targetUserInfo = targetUser.JSONInfo();
-                if(!currentUser.equals(targetUser)){
+                if(currentUser==null || !currentUser.equals(targetUser)){
                     targetUserInfo.remove("email");
                 }
                 userinfo.put("user",targetUserInfo);
