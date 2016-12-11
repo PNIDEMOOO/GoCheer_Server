@@ -4,6 +4,7 @@ import dao.AchievementDAO;
 import dao.AchievementUserDAO;
 import dao.RecordDAO;
 import dao.UserDAO;
+import entity.Achievement;
 import entity.AchievementUser;
 import entity.Record;
 import entity.User;
@@ -73,9 +74,13 @@ public class NewRecordServlet extends HttpServlet {
         else{
             for(Integer i : newAchievement){
                 AchievementUserDAO.getInstance().save(new AchievementUser(i,user.getUsername()));
-                array.add(AchievementDAO.getInstance().findById(i).JSONInfo());
+                Achievement a = AchievementDAO.getInstance().findById(i);
+                array.add(a.JSONInfo());
+                user.setScore(user.getScore()+a.getScore());
             }
             json.put("achievement",array);
+            user.setScoresum(user.getScoresum()+newAchievement.size());
+            UserDAO.getInstance().update(user);
         }
 
         response.getWriter().append(json.toJSONString());

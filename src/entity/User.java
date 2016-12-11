@@ -3,6 +3,7 @@ package entity;
 import dao.AchievementDAO;
 import dao.AchievementUserDAO;
 import dao.BaseDAO;
+import dao.UserDAO;
 import org.json.simple.JSONObject;
 
 import javax.persistence.Basic;
