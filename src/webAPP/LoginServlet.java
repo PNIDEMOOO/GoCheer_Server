@@ -18,7 +18,23 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String extension = request.getParameter("extension");
         User user = UserDAO.getInstance().findById(username,password);
+
+        if(extension!=null && extension.equals("true")){
+            response.setContentType("application/json");
+            if(user==null){
+                request.getSession().removeAttribute("user");
+                response.getWriter().append("false");
+            }
+            else{
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("user",user);
+                response.getWriter().append("true");
+            }
+            return;
+        }
+
         if(user == null){
             request.getSession().removeAttribute("user");
             response.sendRedirect("/error.jsp");

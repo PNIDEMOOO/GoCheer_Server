@@ -35,6 +35,10 @@
         <servlet-name>NewRecordServlet</servlet-name>
         <servlet-class>webAPP.NewRecordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>webAPP.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hi</url-pattern>
@@ -59,5 +63,9 @@
     <servlet-mapping>
         <servlet-name>NewRecordServlet</servlet-name>
         <url-pattern>/newRecord</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 </web-app>

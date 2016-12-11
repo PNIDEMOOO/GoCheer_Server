@@ -110,6 +110,22 @@
   "message": "No avaliable words."
 }
 ```
+
+### `/Login`登录
+    gocheer.donggu.me/Login
+    form-data:
+        username: <username>
+        password: <password>
+        extension: <extension>
+使用 POST 方法，如果是来自插件的请求则`extension`值为`"true"`，其它则不需要这个键。若来自插件，登录成功会返回true，失败为false。  
+
+### `/logout`注销
+    gocheer.donggu.me/logout
+    form-data:
+        extension: <extension>
+
+使用 POST 方法，如果是来自插件的请求则`extension`值为`"true"`，其它则不需要这个键。若来自插件则什么都不会返回。  
+
 ## 后端架构
 ### ORM层 `/src/entity`
 使用 **Hibernate** 生成。位于`/src/Entity`内。  
