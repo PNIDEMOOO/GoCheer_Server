@@ -12,14 +12,14 @@
 使用 GET 方法，返回的为json的`false`或`true`。其中`false`表示用户名已存在，`true`表示用户名不存在可以注册。  
 
 ### `/userInfo`获取用户基本信息
-获取当前登录的用户的信息。  
 #### 调用方法：
-	gocheer.donggu.me/userInfo
+	gocheer.donggu.me/userInfo?username=<username>
 
-使用 GET 方法，返回 json。  
+使用 GET 方法，返回 json。后面的参数可以不加，则默认为查询当前登录用户。  
 
 #### 样例  
 ##### 查询当前登录用户信息（已登录）
+	gocheer.donggu.me/userInfo
 ``` json
 {
   "user": {
@@ -36,6 +36,7 @@
 ```
 
 ##### 查询当前登录用户信息（未登录）
+	gocheer.donggu.me/userInfo
 ``` json
 {
   "user": null
@@ -60,6 +61,55 @@
 }
 ```
 
+### `/newRecord`添加查询记录
+#### 调用方式
+	gocheer.donggu.me/newRecord?word=<word>
+使用 GET 方法，word为划词查询的内容。大小写有没有空格什么的都可以。  
+
+#### 具体说明
+该接口把word全部转化为小写，然后使用正则匹配分析；如果word中仅含有一个单词则为当前用户添加新的查询记录；如果是个长句就不会添加到历史记录中。  
+无论如何只要有词就会为用户加分、加划词次数，并检查是否获得新成就。新获得的成就会以json返回。  
+
+#### 样例代码
+##### 获得新成就
+可能获得不止一个新成就；所以成就会是个数组。
+
+``` json
+{
+  "achievement": [
+    {
+      "image": "default.png",
+      "hidden": false,
+      "name": "Begin",
+      "description": "Enjoy with GoCheer!",
+      "id": 1
+    }
+  ]
+}
+```
+
+##### 没有新成就
+``` json
+{
+  "achievement": null
+}
+```
+
+##### 还没登录
+``` json
+{
+  "error": 1,
+  "message": "Haven't log in"
+}
+```
+
+##### word中不含单词
+``` json
+{
+  "error": 2,
+  "message": "No avaliable words."
+}
+```
 ## 后端架构
 ### ORM层 `/src/entity`
 使用 **Hibernate** 生成。位于`/src/Entity`内。  
