@@ -5,7 +5,7 @@
     padding: 0;
 }
 .jumbotron .container{
-    max-height: 480px;
+    height: 400px;
     background-color: rgba(243, 243, 243, 0.6);
     padding:0;
     width: 850px;

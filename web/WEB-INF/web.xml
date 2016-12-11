@@ -20,8 +20,8 @@
         <servlet-class>webAPP.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ResisterServlet</servlet-name>
-        <servlet-class>webAPP.RegisterServlet</servlet-class>
+        <servlet-name>SignupServlet</servlet-name>
+        <servlet-class>webAPP.SignupServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckUserServlet</servlet-name>
@@ -49,8 +49,8 @@
         <url-pattern>/checkUsername</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ResisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <servlet-name>SignupServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserInfoServlet</servlet-name>

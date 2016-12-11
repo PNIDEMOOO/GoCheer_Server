@@ -14,8 +14,8 @@ import java.io.IOException;
 /**
  * Created by orient on 2016/12/8.
  */
-@WebServlet(name = "RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "SignupServlet")
+public class SignupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
@@ -24,18 +24,7 @@ public class RegisterServlet extends HttpServlet {
         String gender=request.getParameter("gender");
         String alias=request.getParameter("alias");
         String email=request.getParameter("email");
-//
-//        List user = session.createQuery("from User where username='" +username+"' and password = '"+ password + "'").list();
-//        if(user.isEmpty() || user==null){
-//            response.sendRedirect("/error.jsp");
-//        }
-//        else{
-//            HttpSession httpSession = request.getSession();
-//            httpSession.setAttribute("user", user.get(0));
-//            Cookie cookie = new Cookie("sessionId", httpSession.getId());
-//            response.addCookie(cookie);
-//            request.getRequestDispatcher("/hello.jsp").forward(request,response);
-//        }
+
         User user = UserDAO.getInstance().findById(username);
         if(user != null){
             response.sendRedirect("/error.jsp");
@@ -64,7 +53,7 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/register.jsp");
+        response.sendRedirect("/signup.jsp");
     }
 
 }

@@ -1,6 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
+<%--
+  Created by IntelliJ IDEA.
+  User: orient
+  Date: 2016/12/8
+  Time: 下午1:57
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
+    <title>注册</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,29 +21,35 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/header.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet">
+    <link href="css/signup.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <![endif]-->
 </head>
 <body>
-
+<jsp:include page="header.jsp"/>
 <div class="jumbotron">
     <div class="container">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" action="/signup" method="post">
             <div class="form-group">
                 <label for="inputUsername3" class="col-md-4 control-label">Username</label>
                 <div class="col-md-4">
-                    <input type="username" class="form-control" id="inputUsername3" placeholder="Username">
+                    <input name="username" type="username" class="form-control" id="inputUsername3"
+                           placeholder="Username">
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="inputPassword3" class="col-md-4 control-label">Password</label>
                 <div class="col-md-4">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <input name="password" type="password" class="form-control" id="inputPassword3"
+                           placeholder="Password">
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="inputConfirm3" class="col-md-4 control-label">Confirm Password</label>
                 <div class="col-md-4">
@@ -50,23 +64,23 @@
                 <label for="inputConfirm3" class="col-md-4 control-label">Gender</label>
                 <div class="col-md-4">
                     <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Male
+                        <input type="radio" name="gender" id="inlineRadio1" value="1"> Male
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Female
+                        <input type="radio" name="gender" id="inlineRadio2" value="0"> Female
                     </label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputNickname3" class="col-md-4 control-label">Nickname</label>
                 <div class="col-md-4">
-                    <input type="name" class="form-control" id="inputNickname3" placeholder="Nickname">
+                    <input name="alias" type="name" class="form-control" id="inputNickname3" placeholder="Nickname">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-md-4 control-label">Email</label>
                 <div class="col-md-4">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
                 </div>
             </div>
 
@@ -76,8 +90,8 @@
         </form>
     </div>
 </div>
-
-
+<jsp:include page="footer.jsp"/>
+</body>
 <script>
     function check() {
         if (document.getElementById("inputPassword3").value !=
@@ -88,5 +102,4 @@
         }
     }
 </script>
-</body>
 </html>
