@@ -52,6 +52,10 @@ public class User {
         json.put("gender",gender);
         json.put("alias",alias);
         json.put("email",email);
+        json.put("registerTime",registertime.toString());
+        json.put("score",score);
+        json.put("wordsum",wordsum);
+        json.put("scoresum",scoresum);
         return json;
     }
 

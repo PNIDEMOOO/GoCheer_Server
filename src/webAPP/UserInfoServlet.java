@@ -17,7 +17,7 @@ import java.io.IOException;
 @WebServlet(name = "UserInfoServlet")
 public class UserInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,9 @@ public class UserInfoServlet extends HttpServlet {
             }
             else{
                 JSONObject targetUserInfo = targetUser.JSONInfo();
-                targetUserInfo.remove("email");
+                if(!currentUser.equals(targetUser)){
+                    targetUserInfo.remove("email");
+                }
                 userinfo.put("user",targetUserInfo);
             }
         }

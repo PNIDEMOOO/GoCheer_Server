@@ -18,27 +18,45 @@
 
 使用 GET 方法，返回 json。  
 
-#### 样例输出  
-##### 已登录，返回用户信息
+#### 样例  
+##### 查询当前登录用户信息（已登录）
 ``` json
 {
   "user": {
-    "score": 0,
-    "gender": true,
-    "registertime": "2016-12-03 19:43:02.0",
-    "wordsum": 0,
-    "alias": "ly",
+    "score": 9,
+    "gender": false,
+    "wordsum": 9,
+    "registerTime": "2016-12-11 14:15:01",
+    "alias": "陈导",
     "scoresum": 0,
-    "email": "lengyan@mail.com",
-    "username": "lengyan"
+    "email": "hhhhhh@hh.com",
+    "username": "陈冉冉"
   }
 }
 ```
 
-##### 未登录，返回空
+##### 查询当前登录用户信息（未登录）
 ``` json
 {
   "user": null
+}
+```
+
+##### 查询指定用户信息
+用于给用户查看其它用户的信息。得到的json没有邮箱（除非是本人）。  
+
+	gocheer.donggu.me/userInfo?username=<targetusername>
+``` json
+{
+  "user": {
+    "score": 0,
+    "gender": false,
+    "wordsum": 0,
+    "registerTime": "2016-12-11 14:01:21",
+    "alias": "胖妞",
+    "scoresum": 0,
+    "username": "张鸿羽"
+  }
 }
 ```
 
@@ -65,15 +83,11 @@
 
 			User user = UserDAO.getInstance().findById("he");	//若不存在则返回null
 
-### Model层 `/src/model`
-还没东西
-
 ### Controller层 `/src/webAPP`
 各种servlet
 
 ### 视图层 `/web`
 各种jsp
-
 
 ## 依赖
 - JDK 1.8
