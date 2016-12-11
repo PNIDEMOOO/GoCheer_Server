@@ -2,6 +2,9 @@ package dao;
 
 import entity.Record;
 import entity.RecordPK;
+import entity.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  * Created by Donggu on 2016/12/5.
@@ -21,4 +24,5 @@ public class RecordDAO extends BaseDAO<Record> {
     public Record findById(RecordPK pk) {
         return super.findById(Record.class, pk);
     }
+
 }

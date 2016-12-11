@@ -1,11 +1,20 @@
 package entity;
 
+import dao.AchievementDAO;
+import dao.AchievementUserDAO;
+import dao.BaseDAO;
+import org.json.simple.JSONObject;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.locks.Condition;
 
 /**
  * Created by Donggu on 2016/12/10.
@@ -32,6 +41,44 @@ public class User {
         this.alias = alias;
         this.email = email;
     }
+
+    public JSONObject JSONInfo(){
+        JSONObject json = new JSONObject();
+        json.put("username", username);
+        json.put("gender",gender);
+        json.put("alias",alias);
+        json.put("email",email);
+        return json;
+    }
+
+    /**
+     * check whether user gets new achievements
+     * @return arraylist of new achievements
+     */
+    public ArrayList<Integer> checkAchievement(){
+        ArrayList<Integer> newAchievements = new ArrayList<>();
+        ArrayList<Integer> userAchievements = AchievementUserDAO.getInstance().findByUser(username);
+        List achievements = BaseDAO.query("from Achievement");
+
+        // 遍历查看
+        for(Iterator it = achievements.iterator(); it.hasNext();){
+            Achievement a = (Achievement)it.next();
+            // 判断用户是否已获得该成就
+            if(userAchievements.contains(a.getId())) continue;
+            // 根据成就类型进行读取
+            switch (a.getType()){
+                // 查询次数达到一定数量
+                case "wordsum":
+                    if(this.wordsum == Integer.parseInt(a.getCondition())){
+                        newAchievements.add(a.getId());
+                    }
+                    break;
+                default:
+            }
+        }
+        return newAchievements;
+    }
+
     @Id
     @Column(name = "username", nullable = false, length = 255)
     public String getUsername() {

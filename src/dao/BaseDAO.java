@@ -38,7 +38,7 @@ public class BaseDAO<E> {
         }
     }
 
-    private static Session getSession(){
+    protected static Session getSession(){
         return factory.openSession();
     }
 

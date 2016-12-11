@@ -1,10 +1,8 @@
 package webAPP;
 
-import Model.BeanConverter;
+import dao.UserDAO;
 import entity.User;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,18 +21,26 @@ public class UserInfoServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User)request.getSession().getAttribute("user");
-        JSONObject json = new JSONObject();
-        if(user==null){
-            json.put("user", null);
+        User currentUser = (User)request.getSession().getAttribute("user");
+        String targetUsername = request.getParameter("username");
+        JSONObject userinfo = new JSONObject();
+
+        if(targetUsername==null){
+            userinfo.put("user",currentUser==null?null:currentUser.JSONInfo());
         }
-        else {
-            JSONObject userinfo = BeanConverter.toJSON(user);
-            userinfo.remove("password");
-            json.put("user",userinfo);
+        else{
+            User targetUser = UserDAO.getInstance().findById(targetUsername);
+            if(targetUser==null){
+                userinfo.put("user",null);
+            }
+            else{
+                JSONObject targetUserInfo = targetUser.JSONInfo();
+                targetUserInfo.remove("email");
+                userinfo.put("user",targetUserInfo);
+            }
         }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().append(json.toJSONString());
+        response.getWriter().append(userinfo.toJSONString());
     }
 }

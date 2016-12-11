@@ -8,7 +8,7 @@
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="connection.username">donggu</property>
     <property name="connection.password">glgjssy</property>
-    <mapping resource="entity/mapping.xml"/>
+      <mapping resource="entity/mapping.xml"/>
       <mapping class="entity.Achievement"/>
       <mapping class="entity.AchievementUser"/>
       <mapping class="entity.Record"/>

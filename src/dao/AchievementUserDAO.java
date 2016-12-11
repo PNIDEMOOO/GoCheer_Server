@@ -1,7 +1,15 @@
 package dao;
 
+import entity.Achievement;
 import entity.AchievementUser;
 import entity.AchievementUserPK;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Donggu on 2016/12/5.
@@ -20,5 +28,20 @@ public class AchievementUserDAO extends BaseDAO<AchievementUser> {
 
     public AchievementUser findById(AchievementUserPK pk) {
         return super.findById(AchievementUser.class, pk);
+    }
+
+    public ArrayList<Integer> findByUser(String username){
+        Session session = BaseDAO.getSession();
+        Query query = session.createQuery("from AchievementUser where user = :username");
+        query.setParameter("username", username);
+        List list = query.getResultList();
+        session.close();
+
+        ArrayList<Integer> result = new ArrayList<>();
+        for(Iterator it = list.iterator();it.hasNext();){
+            Achievement a = (Achievement)it.next();
+            result.add(a.getId());
+        }
+        return result;
     }
 }

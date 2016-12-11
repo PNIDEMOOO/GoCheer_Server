@@ -31,6 +31,10 @@
         <servlet-name>UserInfoServlet</servlet-name>
         <servlet-class>webAPP.UserInfoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewRecordServlet</servlet-name>
+        <servlet-class>webAPP.NewRecordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hi</url-pattern>
@@ -51,5 +55,9 @@
     <servlet-mapping>
         <servlet-name>UserInfoServlet</servlet-name>
         <url-pattern>/userInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewRecordServlet</servlet-name>
+        <url-pattern>/newRecord</url-pattern>
     </servlet-mapping>
 </web-app>

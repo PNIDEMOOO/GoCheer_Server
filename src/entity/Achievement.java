@@ -1,12 +1,14 @@
 package entity;
 
+import org.json.simple.JSONObject;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Created by Donggu on 2016/12/5.
+ * Created by Donggu on 2016/12/11.
  */
 @Entity
 public class Achievement {
@@ -17,7 +19,19 @@ public class Achievement {
     private String condition;
     private String condition2;
     private String image;
-    private byte hidden;
+    private boolean hidden;
+
+
+    public JSONObject JSONInfo(){
+        JSONObject json= new JSONObject();
+        json.put("id", id);
+        json.put("name", name);
+        json.put("description", description);
+        json.put("image", image);
+        json.put("hidden", hidden);
+
+        return json;
+    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -91,11 +105,11 @@ public class Achievement {
 
     @Basic
     @Column(name = "hidden", nullable = false)
-    public byte getHidden() {
+    public boolean isHidden() {
         return hidden;
     }
 
-    public void setHidden(byte hidden) {
+    public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
 
@@ -127,7 +141,7 @@ public class Achievement {
         result = 31 * result + (condition != null ? condition.hashCode() : 0);
         result = 31 * result + (condition2 != null ? condition2.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
-        result = 31 * result + (int) hidden;
+        result = 31 * result + (hidden ? 1 : 0);
         return result;
     }
 }
