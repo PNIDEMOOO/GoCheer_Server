@@ -54,8 +54,9 @@ public class NewRecordServlet extends HttpServlet {
         }
 
         // 查了一个单词才加入记录
+        Record record = null;
         if (matcher.groupCount() == 1) {
-            Record record = new Record(matcher.group(0), user.getUsername());
+            record = new Record(matcher.group(0), user.getUsername());
             RecordDAO.getInstance().save(record);
         }
 
@@ -65,7 +66,7 @@ public class NewRecordServlet extends HttpServlet {
         UserDAO.getInstance().update(user);
 
         // check for new Achievements
-        ArrayList<Integer> newAchievement = user.checkAchievement();
+        ArrayList<Integer> newAchievement = user.checkAchievement(record);
         JSONObject json = new JSONObject();
         JSONArray array = new JSONArray();
         if(newAchievement.isEmpty()){

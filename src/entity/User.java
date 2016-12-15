@@ -59,9 +59,10 @@ public class User {
 
     /**
      * check whether user gets new achievements
+     * @param newRecord new record of searching word (null maybe)
      * @return arraylist of new achievements
      */
-    public ArrayList<Integer> checkAchievement(){
+    public ArrayList<Integer> checkAchievement(Record newRecord){
         ArrayList<Integer> newAchievements = new ArrayList<>();
         ArrayList<Integer> userAchievements = AchievementUserDAO.getInstance().findByUser(username);
         List achievements = BaseDAO.query("from Achievement");
@@ -73,12 +74,20 @@ public class User {
             if(userAchievements.contains(a.getId())) continue;
             // 根据成就类型进行读取
             switch (a.getType()){
-                // 查询次数达到一定数量
+                // 查询次数达到指定数量
                 case "wordsum":
                     if(this.wordsum >= Integer.parseInt(a.getCondition())){
                         newAchievements.add(a.getId());
                     }
                     break;
+                // 查询某些特定单词
+                case "specific word":
+                    if(newRecord!=null&&newRecord.getWord().equals(a.getCondition())){
+                        newAchievements.add(a.getId());
+                    }
+                    break;
+                // 在某些特殊的时刻
+                //
                 default:
             }
         }

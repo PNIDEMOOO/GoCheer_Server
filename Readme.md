@@ -160,4 +160,5 @@
 - json-simple-1.1.1
 - Hibernate 3.x
 - (JDBC) mysql-connector-java-5.1.40-bin
-- Tomcat 9.0.0.M11
+- Tomcat 9.0.0.M11  
+- jersey-bundle-1.19.1  
