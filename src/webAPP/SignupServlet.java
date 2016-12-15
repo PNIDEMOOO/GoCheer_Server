@@ -47,7 +47,7 @@ public class SignupServlet extends HttpServlet {
                 httpSession.setAttribute("user", user1);
                 Cookie cookie = new Cookie("sessionId", httpSession.getId());
                 response.addCookie(cookie);
-                request.getRequestDispatcher("hello.jsp").forward(request, response);
+                request.getRequestDispatcher("/hello.jsp").forward(request, response);
             }
         }
     }

@@ -16,10 +16,10 @@ public class SendMail {
         client.addFilter(new HTTPBasicAuthFilter("api",
                 "key-77ed9a5a192dd6c5b90591b027c769b1"));
         WebResource webResource =
-                client.resource("https://api.mailgun.net/v3/sandbox0ff46f0e9c804b96a732cbeba68fb835.mailgun.org/messages");
+                client.resource("https://api.mailgun.net/v3/gocheer.donggu.me/messages");
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
-        formData.add("from", "Mailgun Sandbox <postmaster@gocheer.donggu.me.mailgun.org>");
-        formData.add("to", "<646189444@qq.com>");
+        formData.add("from", "Mailgun Sandbox <postmaster@gocheer.donggu.me>");
+        formData.add("to", "donggu <452937660@qq.com>");
         formData.add("subject", "账户激活邮件");
         formData.add("text", "Congratulations dongg, you just sent an email with Mailgun!  You are truly awesome!  You can see a record of this email in your logs: https://mailgun.com/cp/log");
         return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).
