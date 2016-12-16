@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 public class SendMail {
 
     public static ClientResponse SendCongratulations(User user, Achievement achievement){
-        // TODO: 向user发送恭喜获得成就的信息
+        // TODO: 向user发送恭喜获得某某成就的信息。邮件中用昵称来称呼用户。
         return null;
     }
 
