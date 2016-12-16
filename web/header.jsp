@@ -3,7 +3,7 @@
 <body>
 <!--这是页头-->
 <div class="header">
-    <a href="index.html">
+    <a href="index.jsp">
         <span><img src="images/logo.png"> </span>
     </a>
 </div>

@@ -1,16 +1,46 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Donggu
-  Date: 2016/12/5
-  Time: 19:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>GoCheer: A Google Chrome Extensiton</title>
+
+    <!--设置网页图标-->
+    <link rel="shortcut icon" href="images/logo.png" type=”image/x-icon”/>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="jb1">
+    <button type="button" class="btn btn-default">Download GoCheer</button>
+</div>
+<div id="jb2">
+    <img src="images/jb2.png">
+    <img src="images/jb3.png">
+    <img src="images/jb4.png">
+    <img src="images/jb5.png">
+</div>
+
+<script>
+    function changeBg() {
+        var bg=document.getElementById("jb1");
+        bg.style.transition = 'background-color 10000ms';
+        function change() {
+            var h = Math.round(Math.random()*360);
+            while ((h>35&&h<130)||(h>175&&h<340)) h = Math.round(Math.random()*360);
+            var s = Math.round(Math.random()*40+30);
+            var l = Math.round(Math.random()*40+30);
+            bg.style.backgroundColor = "HSL("+h+", "+s+"%, "+l+"%)";
+            setTimeout(change, 10000);
+        }
+        change()
+    }
+    changeBg();
+</script>
+
+</body>
 </html>

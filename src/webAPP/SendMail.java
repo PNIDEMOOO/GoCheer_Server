@@ -5,12 +5,21 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import entity.Achievement;
+import entity.User;
+
 import javax.ws.rs.core.MediaType;
 
 /**
  * Created by orient on 2016/12/11.
  */
 public class SendMail {
+
+    public static ClientResponse SendCongratulations(User user, Achievement achievement){
+        // TODO: 向user发送恭喜获得成就的信息
+        return null;
+    }
+
     public static ClientResponse SendSimpleMessage() {
         Client client = Client.create();
         client.addFilter(new HTTPBasicAuthFilter("api",
