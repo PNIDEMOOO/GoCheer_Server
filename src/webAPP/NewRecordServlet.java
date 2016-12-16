@@ -78,6 +78,8 @@ public class NewRecordServlet extends HttpServlet {
                 Achievement a = AchievementDAO.getInstance().findById(i);
                 array.add(a.JSONInfo());
                 user.setScore(user.getScore()+a.getScore());
+                // 发送邮件
+                SendMail.SendCongratulations(user, a);
             }
             json.put("achievement",array);
             user.setScoresum(user.getScoresum()+newAchievement.size());
