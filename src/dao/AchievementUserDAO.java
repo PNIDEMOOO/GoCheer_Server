@@ -44,4 +44,18 @@ public class AchievementUserDAO extends BaseDAO<AchievementUser> {
         }
         return result;
     }
+
+    public ArrayList<AchievementUser> getUserAchievements(String username){
+        Session session = BaseDAO.getSession();
+        Query query = session.createQuery("from AchievementUser where user = :username");
+        query.setParameter("username", username);
+        List list = query.getResultList();
+        ArrayList<AchievementUser> result = new ArrayList<>();
+        for(Iterator it = list.iterator();it.hasNext();){
+            AchievementUser a = (AchievementUser) it.next();
+            result.add(a);
+        }
+        
+        return result;
+    }
 }

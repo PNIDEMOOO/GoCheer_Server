@@ -14,7 +14,7 @@
 <%
     User user = (User)request.getSession().getAttribute("user");
     if(user == null){
-        response.sendRedirect("/Login.jsp");
+        response.sendRedirect("/login.jsp");
     }
     else{
         out.println(user.getUsername());

@@ -66,6 +66,7 @@ public class AchievementUser {
         return true;
     }
 
+
     @Override
     public int hashCode() {
         int result = achievement;
