@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         else{
             HttpSession httpSession = request.getSession();
             httpSession.setAttribute("user",user);
-            request.getRequestDispatcher("hello.jsp").forward(request,response);
+            response.sendRedirect("/home/"+username);
         }
     }
 
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/hello.jsp");
         }
         else{
-            response.sendRedirect("/Login.jsp");
+            response.sendRedirect("/login.jsp");
         }
     }
 }

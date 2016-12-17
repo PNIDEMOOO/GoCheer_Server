@@ -1,13 +1,11 @@
-<%@ page import="entity.User" %>
-<%@ page import="java.security.Timestamp" %>
-<%@ page import="java.time.LocalDateTime" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.Instant" %>
-<%@ page import="java.time.Duration" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="dao.AchievementDAO" %>
 <%@ page import="dao.AchievementUserDAO" %>
-<%@ page import="java.util.List" %>
-<%@ page import="dao.BaseDAO" %>
+<%@ page import="entity.Achievement" %>
+<%@ page import="entity.AchievementUser" %>
+<%@ page import="entity.User" %>
+<%@ page import="java.time.Duration" %>
+<%@ page import="java.time.Instant" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User target = (User)request.getAttribute("targetUser");
@@ -22,23 +20,24 @@
     <title>GoCheer: Home</title>
 
     <!--设置网页图标-->
-    <link rel="shortcut icon" href="images/logo.png" type=”image/x-icon”/>
+    <link rel="shortcut icon" href="../images/logo.png" type=”image/x-icon”/>
     <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/header.css" rel="stylesheet">
-    <link href="css/footer.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/header.css" rel="stylesheet">
+    <link href="../css/footer.css" rel="stylesheet">
+    <link href="../css/login-state.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 <div class="container">
     <div class="row">
 
         <div class="col-lg-3">
             <a class="thumbnail">
-                <img data-src="holder.js/100%x230" src="images/logo.png">
+                <img data-src="holder.js/100%x230" src="../images/logo.png">
             </a>
             <div class="list-group">
                 <a href="#" class="list-group-item">
@@ -97,9 +96,6 @@
                             <div class="panel-body">
                                 <table class="table table-hover">
                                     <thead>
-                                    <%
-                                        List userAchievement
-                                    %>
                                     <tr>
                                         <th>Time</th>
                                         <th>Name</th>
@@ -107,16 +103,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                        <td>Column content</td>
-                                    </tr>
+                                    <%
+                                        ArrayList<AchievementUser> userAchievement = AchievementUserDAO.getInstance().getUserAchievements(target.getUsername());
+                                        for(AchievementUser au: userAchievement){
+                                            Achievement ach = AchievementDAO.getInstance()
+                                                    .findById(au.getAchievement());
+                                            out.println("<tr>");
+                                            out.println("<th>" + au.getTime() + "</th>");
+                                            out.println("<th>" + ach.getName() + "</th>");
+                                            out.println("<th>" + ach.getDescription() + "</th>");
+                                            out.println("</tr>");
+                                        }
+                                    %>
                                     </tbody>
                                 </table>
                             </div>
@@ -159,6 +157,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>

@@ -8,13 +8,14 @@ import org.hibernate.Transaction;
 
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by Donggu on 2016/12/5.
  */
-public class AchievementUserDAO extends BaseDAO<AchievementUser> {
+public class AchievementUserDAO extends BaseDAO<AchievementUser> implements Comparator<AchievementUser>{
     private static AchievementUserDAO instance = new AchievementUserDAO();
     private AchievementUserDAO(){}
 
@@ -55,7 +56,13 @@ public class AchievementUserDAO extends BaseDAO<AchievementUser> {
             AchievementUser a = (AchievementUser) it.next();
             result.add(a);
         }
-        
+        result.sort(this);
         return result;
+    }
+
+    @Override
+    public int compare(AchievementUser o1, AchievementUser o2) {
+        return o2.compareTo(o1);
+
     }
 }
