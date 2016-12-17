@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * Created by Donggu on 2016/12/3.
@@ -42,7 +43,7 @@ public class LoginServlet extends HttpServlet {
         else{
             HttpSession httpSession = request.getSession();
             httpSession.setAttribute("user",user);
-            response.sendRedirect("/home/"+username);
+            response.sendRedirect("/home/"+URLEncoder.encode(username,"utf-8"));
         }
     }
 
