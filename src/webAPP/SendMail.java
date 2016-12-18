@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  */
 public class SendMail {
 
-    public static  ClientResponse SendCongratulations(User user, Achievement achievement){
+    public static  void SendCongratulations(User user, Achievement achievement){
         String alas=user.getAlias();
         String email=user.getEmail();
         String text_title="Dear "+alas+"\n.";
