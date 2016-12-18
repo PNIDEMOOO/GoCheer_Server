@@ -32,6 +32,7 @@ public class NewRecordServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             JSONObject error = new JSONObject();

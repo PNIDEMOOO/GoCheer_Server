@@ -30,7 +30,7 @@ public class AchievementDAO extends BaseDAO<Achievement> {
      */
     public List getAllAchievements(){
         Session session = getSession();
-        List result = session.createQuery("from Achievement order by type").list();
+        List result = session.createQuery("from Achievement order by hidden,type").list();
         session.close();
         return result;
     }

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>枸杞-个人信息</title>
+
+    <!--设置网页图标-->
+    <link rel="shortcut icon" href="images/logo.png" type=”image/x-icon”/>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <<link href="css/home.css" rel="stylesheet">
+    <!--<link href="css/header.css" rel="stylesheet">-->
+    <!--<link href="css/footer.css" rel="stylesheet">-->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <![endif]-->
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-3">
+            <a class="thumbnail">
+                <img data-src="holder.js/100%x230" src="images/logo.png">
+            </a>
+
+            <table class="table table-condensed table-score">
+                <thead>
+                <tr>
+                    <th>2000</th>
+                    <th>300</th>
+                    <th>2500</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Words</td>
+                    <td>Achs</td>
+                    <td>Scores</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="list-group">
+                <div class="list-group-item">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span id="name"><B>Name</B></span>
+                    <span class="badge badge-male" id="gender">♂</span>
+                </div>
+                <div href="#" class="list-group-item">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                    <span id="email">Email</span>
+                </div>
+                <div href="#" class="list-group-item">
+                    <span class="glyphicon glyphicon-time"></span>
+                    <span id="registertime">RegisterTime</span>
+                </div>
+            </div>
+            <button type="button" class="btn btn-danger btn-lg btn-block">View Leaderboard</button>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="bs-example">
+                <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+                    <li class="active"><a href="#achievement" role="tab" data-toggle="tab">Achievement <span class="badge">4</span></a></li>
+                    <li><a href="#list" role="tab" data-toggle="tab">List <span class="badge">4</span></a></li>
+                    <li><a href="#history" role="tab" data-toggle="tab">History <span class="badge">4</span></a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+
+                    <div class="tab-pane active" id="achievement">
+                        <div class="alert alert-success" role="alert">There are the achievements you have got.</div>
+
+                        <ul class="media-list">
+                            <li class="media">
+                                <div class="pull-right">
+                                    <span class="label label-success">2016.12.17</span>
+                                </div>
+                                <a class="pull-left">
+                                    <img data-src="holder.js/64x64" alt="64x64" src="images/achieve.png">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">成就名称</h4>
+                                    <p>成就描述</p>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="pull-right">
+                                    <span class="label label-success">2016.12.10</span>
+                                </div>
+                                <a class="pull-left">
+                                    <img data-src="holder.js/64x64" alt="64x64" src="images/achieve.png">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">成就名称</h4>
+                                    <p>成就描述</p>
+                                </div>
+                            </li>
+                        </ul>
+
+
+
+
+
+
+
+                    </div>
+                    <div class="tab-pane" id="list">
+                        <div class="alert alert-info" role="alert">There are all the achievements you can get.</div>
+
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left">
+                                    <img data-src="holder.js/64x64" alt="64x64" src="images/achieve.png">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">成就名称</h4>
+                                    <p>成就描述</p>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <a class="pull-left">
+                                    <img data-src="holder.js/64x64" alt="64x64" src="images/achieve.png">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">成就名称</h4>
+                                    <p>成就描述</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="tab-pane" id="history">
+                        <div class="alert alert-warning" role="alert">There are all the words you have checked.</div>
+                        <ul class="media-list">
+                            <li class="media">
+                                <div class="pull-right">
+                                    <span class="label label-warning">2016.12.17</span>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Word</h4>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="pull-right">
+                                    <span class="label label-warning">2016.12.17</span>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Word</h4>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
