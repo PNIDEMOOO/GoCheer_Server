@@ -22,6 +22,7 @@
             </div>
             <div class="col-md-3">
                 <strong>开发人员</strong>
+                <a href="/logout">Sign out</a>
             </div>
         </div>
     </div>

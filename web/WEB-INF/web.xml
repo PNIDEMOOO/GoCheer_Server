@@ -42,6 +42,7 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckUserServlet</servlet-name>
@@ -50,6 +51,7 @@
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
+        <url-pattern>/Signup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserInfoServlet</servlet-name>

@@ -17,10 +17,10 @@ public class LogoutServlet extends HttpServlet {
         String extension = request.getParameter("extension");
         if(extension!=null && extension.equals("true")) return;
 
-        response.sendRedirect("/Login.jsp");
+        response.sendRedirect("/login.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 }
