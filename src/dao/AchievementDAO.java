@@ -1,6 +1,9 @@
 package dao;
 
 import entity.Achievement;
+import org.hibernate.Session;
+
+import java.util.List;
 
 /**
  * Created by Donggu on 2016/12/5.
@@ -19,5 +22,16 @@ public class AchievementDAO extends BaseDAO<Achievement> {
 
     public Achievement findById(int id) {
         return super.findById(Achievement.class, id);
+    }
+
+    /**
+     * get all achievements.
+     * @return List of all achievements.
+     */
+    public List getAllAchievements(){
+        Session session = getSession();
+        List result = session.createQuery("from Achievement order by type").list();
+        session.close();
+        return result;
     }
 }

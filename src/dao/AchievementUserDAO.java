@@ -54,10 +54,11 @@ public class AchievementUserDAO extends BaseDAO<AchievementUser> {
      * @return ArrayList of AchievementUser, sorted by time desc
      */
     public List getUserAchievements(String username){
-        Session session = BaseDAO.getSession();
+        Session session = getSession();
         Query query = session.createQuery("from AchievementUser where user = :username order by time desc");
         query.setParameter("username", username);
         List list = query.getResultList();
+        session.close();
         return list;
     }
 }
