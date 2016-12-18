@@ -8,12 +8,16 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="dao.RecordDAO" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="entity.Record" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User target = (User) request.getAttribute("targetUser");
     boolean isSelf = (boolean) request.getAttribute("isSelf");
     List all = AchievementDAO.getInstance().getAllAchievements();
     List userAchievements = AchievementUserDAO.getInstance().getUserAchievements(target.getUsername());
+    List history = RecordDAO.getInstance().getUserHistory(target.getUsername());
 %>
 <html lang="zh-cn">
 <head>
@@ -66,7 +70,7 @@
                 <div class="list-group-item">
                     <span class="glyphicon glyphicon-user"></span>
                     <span id="name"><B><%=target.getAlias()%></B></span>
-                    <span class="badge badge-male" id="gender"><%=target.isGender() ? "♂" : "♀"%></span>
+                    <span class="badge badge-<%=target.isGender()?"male":"female"%>" id="gender"><%=target.isGender() ? "♂" : "♀"%></span>
                 </div>
                 <%
                     if (isSelf) {
@@ -103,12 +107,10 @@
             <div class="bs-example">
                 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
                     <li class="active"><a href="#achievement" role="tab" data-toggle="tab">My Achievements</a></li>
-                    <li><a href="#allachievements" role="tab" data-toggle="tab">All Achievements<span
-                            class="badge"><%=all.size()%></span></a>
-                    </li>
+                    <li><a href="#allachievements" role="tab" data-toggle="tab">All Achievements</a></li>
                     <%
-                        if (isSelf) {
-                            out.println("<li><a href=\"#history\" role=\"tab\" data-toggle=\"tab\">My History<span class=\"badge\">4</span></a></li>");
+                        if(isSelf){
+                            out.println("<li><a href=\"#history\" role=\"tab\" data-toggle=\"tab\">My History</a></li>");
                         }
                     %>
                 </ul>
@@ -129,8 +131,12 @@
                                     out.println("<h4 class=\"media-heading\">" + ach.getName() + "</h4>");
                                     out.println("<p>" + ach.getDescription() + "</p>");
                                     out.println("</div>");
-                                    out.println("<div class=\"date col-md-2\">");
-                                    out.println("<span class=\"label label-success\">" + au.getTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "</span></div></li>");
+                                    out.println("<div class=\"date col-md-3\">");
+                                    out.println("<span class=\"label label-success\">" + au.getTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "</span>");
+                                    if(au.getTime().toLocalDateTime().toLocalDate().isEqual(LocalDate.now())){
+                                        out.println("<p class=\"label label-warning\">New !</p>");
+                                    }
+                                    out.println("</div></li>");
                                 }
                             %>
                         </ul>
@@ -138,38 +144,6 @@
 
                     <div class="tab-pane" id="allachievements">
                         <div class="alert alert-info" role="alert">There are all the achievements you can get.</div>
-                        <div class="hidden panel panel-success">
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%
-                                        for (Iterator it = all.iterator(); it.hasNext(); ) {
-                                            Achievement a = (Achievement) it.next();
-                                            out.println("<tr>");
-                                            if (a.isHidden()) {
-                                                out.println("<td>??????</td>");
-                                                out.println("<td>??????????</td>");
-                                                out.println("<td>??????????</td>");
-                                            } else {
-                                                out.println("<td>" + a.getType() + "</td>");
-                                                out.println("<td>" + a.getName() + "</td>");
-                                                out.println("<td>" + a.getDescription() + "</td>");
-                                            }
-                                            out.println("</tr>");
-                                        }
-
-                                    %>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                         <ul class="media-list my-achievements row">
                             <%
                                 for (Iterator it = all.iterator(); it.hasNext(); ) {
@@ -193,9 +167,31 @@
                             %>
                         </ul>
                     </div>
-                    <% if (isSelf) { %>
-                    <jsp:include page="history.jsp"/>
-                    <%}%>
+
+                    <% if (isSelf) {
+                        out.println("<div class=\"tab-pane\" id=\"history\">\n" +
+                                "<div class=\"alert alert-warning\" role=\"alert\">" +
+                                "There are all the words you have checked.</div>\n" +
+                                "<ul class=\"media-list\">");
+                        LocalDate date = null;
+                        for (Iterator it = history.iterator(); it.hasNext();) {
+                            Record record = (Record) it.next();
+                            if (date == null || !date.equals(record.getDatetime().toLocalDateTime().toLocalDate())) {
+                                if(date!=null){
+                                    out.println("</div></li>");
+                                }
+                                date = record.getDatetime().toLocalDateTime().toLocalDate();
+                                out.println("<li class=\"media\">");
+                                out.println("<div class=\"pull-left\">");
+                                out.println("<span class=\"label label-warning\">");
+                                out.println(date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
+                                out.println("</span></div><div class=\"media-body\">");
+                            }
+                            out.println("<span class=\"badge badge-lg\">"+record.getWord()+"</span>");
+                        }
+                        out.println("</div></li>");
+                        out.println("</ul></div>");
+                    }%>
                 </div>
             </div>
 
