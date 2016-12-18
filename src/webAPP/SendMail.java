@@ -5,6 +5,8 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import dao.AchievementDAO;
+import dao.UserDAO;
 import entity.Achievement;
 import entity.User;
 
@@ -15,30 +17,25 @@ import javax.ws.rs.core.MediaType;
  */
 public class SendMail {
 
-    public static void SendCongratulations(User user, Achievement achievement){
-        // TODO: 向user发送恭喜获得某某成就的信息。邮件中用昵称来称呼用户。
-    }
-
-    public static ClientResponse SendSimpleMessage() {
+    public static  ClientResponse SendCongratulations(User user, Achievement achievement){
+        String alas=user.getAlias();
+        String email=user.getEmail();
+        String text_title="Dear "+alas+"\n.";
+        String text_content="Congratulations on obtaining the achievement "+achievement.getName()+"\n.";
+        String text_end="Hope you make persistent efforts!\n";
+        String text=text_title+text_content+text_end;
+        
         Client client = Client.create();
         client.addFilter(new HTTPBasicAuthFilter("api",
                 "key-77ed9a5a192dd6c5b90591b027c769b1"));
         WebResource webResource =
                 client.resource("https://api.mailgun.net/v3/gocheer.donggu.me/messages");
+
+
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
         formData.add("from", "Mailgun Sandbox <postmaster@gocheer.donggu.me>");
-        formData.add("to", "donggu <452937660@qq.com>");
-        formData.add("subject", "账户激活邮件");
-        formData.add("text", "Congratulations dongg, you just sent an email with Mailgun!  You are truly awesome!  You can see a record of this email in your logs: https://mailgun.com/cp/log");
-        return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).
-                post(ClientResponse.class, formData);
-    }
-
-    public static void main(String[] args) {
-        ClientResponse clientResponse=SendSimpleMessage();
-        if(clientResponse!=null)
-            System.out.println("Send Sucessfully!");
-        else
-            System.out.println("Failure!");
+        formData.add("to", email);
+        formData.add("subject", "Achievement Message");
+        formData.add("text",text);
     }
 }
