@@ -36,6 +36,11 @@
                     <span class="input__label-content input__label-content--hoshi">Password</span>
                 </label>
             </span>
+            <%
+                if(request.getAttribute("wrong")!=null){
+                    out.println("<p style=\"color: #E94B00\">Error: Invalid username or password.</p>");
+                }
+            %>
             <button type="submit" class="btn btn-default btn-lg btn-block btn-login">Login</button>
         </form>
     </div>

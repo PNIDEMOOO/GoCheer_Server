@@ -26,4 +26,6 @@ public class UserDAO extends BaseDAO<User> {
     public void delete(String username) {
         super.delete(User.class, username);
     }
+
+    // TODO: 添加获取按分数排序的所有用户列表
 }

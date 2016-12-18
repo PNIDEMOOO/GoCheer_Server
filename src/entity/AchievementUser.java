@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "achievement_user", schema = "javaEE", catalog = "")
 @IdClass(AchievementUserPK.class)
-public class AchievementUser implements Comparable{
+public class AchievementUser{
     private int achievement;
     private String user;
     private Timestamp time;
@@ -73,11 +73,5 @@ public class AchievementUser implements Comparable{
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        AchievementUser a = (AchievementUser)o;
-        return this.time.compareTo(a.getTime());
     }
 }

@@ -5,7 +5,8 @@
 <%@ page import="entity.User" %>
 <%@ page import="java.time.Duration" %>
 <%@ page import="java.time.Instant" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User target = (User)request.getAttribute("targetUser");
@@ -104,10 +105,11 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        ArrayList<AchievementUser> userAchievement = AchievementUserDAO.getInstance().getUserAchievements(target.getUsername());
-                                        for(AchievementUser au: userAchievement){
-                                            Achievement ach = AchievementDAO.getInstance()
-                                                    .findById(au.getAchievement());
+                                        List userAchievements = AchievementUserDAO.getInstance()
+                                                .getUserAchievements(target.getUsername());
+                                        for(Iterator it = userAchievements.iterator();it.hasNext();){
+                                            AchievementUser au = (AchievementUser)it.next();
+                                            Achievement ach = AchievementDAO.getInstance().findById(au.getAchievement());
                                             out.println("<tr>");
                                             out.println("<th>" + au.getTime() + "</th>");
                                             out.println("<th>" + ach.getName() + "</th>");

@@ -1,11 +1,8 @@
 package dao;
 
-import entity.Achievement;
 import entity.AchievementUser;
 import entity.AchievementUserPK;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -54,30 +51,13 @@ public class AchievementUserDAO extends BaseDAO<AchievementUser> {
     /**
      * get all Achievements which the user has got, in time order.
      * @param username username
-     * @return ArrayList of AchievementUser, sorted by time (latest first)
+     * @return ArrayList of AchievementUser, sorted by time desc
      */
-    public ArrayList<AchievementUser> getUserAchievements(String username){
+    public List getUserAchievements(String username){
         Session session = BaseDAO.getSession();
-        Query query = session.createQuery("from AchievementUser where user = :username");
+        Query query = session.createQuery("from AchievementUser where user = :username order by time desc");
         query.setParameter("username", username);
         List list = query.getResultList();
-        ArrayList<AchievementUser> result = new ArrayList<>();
-        for(Iterator it = list.iterator();it.hasNext();){
-            AchievementUser a = (AchievementUser) it.next();
-            result.add(a);
-        }
-        result.sort(new AUComparator());
-        return result;
-    }
-
-    /**
-     * AchievementUser comparator, compare by time.
-     */
-    static class AUComparator implements Comparator<AchievementUser>{
-        @Override
-        public int compare(AchievementUser o1, AchievementUser o2) {
-            return o2.compareTo(o1);
-
-        }
+        return list;
     }
 }

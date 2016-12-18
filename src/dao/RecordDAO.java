@@ -25,4 +25,5 @@ public class RecordDAO extends BaseDAO<Record> {
         return super.findById(Record.class, pk);
     }
 
+    // TODO: 添加根据用户名获取用户查词历史的函数。按时间先后排列
 }
