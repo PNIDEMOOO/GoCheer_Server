@@ -16,7 +16,7 @@
 
 <body>
 <div id="jb1">
-    <button type="button" class="btn btn-default">Download GoCheer</button>
+    <a type="button"  href="GoCheer.crx" class="btn btn-default">Download GoCheer</a>
 </div>
 <div id="jb2">
     <img src="images/jb2.png">

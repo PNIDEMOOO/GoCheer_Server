@@ -54,4 +54,9 @@
     margin: 0 2px;
     margin-bottom: 8px;
     background: none;
+    font-weight: normal;
+}
+
+span.glyphicon{
+    margin-right: 20px;
 }
