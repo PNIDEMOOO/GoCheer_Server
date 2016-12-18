@@ -36,6 +36,7 @@
 
 .date {
     margin-top: 45px;
+    text-align: center;
 }
 
 .media {
@@ -59,4 +60,9 @@
 
 span.glyphicon{
     margin-right: 20px;
+}
+
+.gray-img img{
+    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+    -webkit-filter: grayscale(100%);
 }

@@ -15,8 +15,8 @@
 <%
     User target = (User) request.getAttribute("targetUser");
     boolean isSelf = (boolean) request.getAttribute("isSelf");
-    List all = AchievementDAO.getInstance().getAllAchievements();
     List userAchievements = AchievementUserDAO.getInstance().getUserAchievements(target.getUsername());
+    List notUserAch = AchievementUserDAO.getInstance().getNotUserAchievements(target.getUsername());
     List history = RecordDAO.getInstance().getUserHistory(target.getUsername());
 %>
 <html lang="zh-cn">
@@ -106,8 +106,7 @@
         <div class="col-lg-9">
             <div class="bs-example">
                 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                    <li class="active"><a href="#achievement" role="tab" data-toggle="tab">My Achievements</a></li>
-                    <li><a href="#allachievements" role="tab" data-toggle="tab">All Achievements</a></li>
+                    <li class="active"><a href="#achievement" role="tab" data-toggle="tab"><%=isSelf?"My":(target.isGender()?"His":"Her")%> Achievements</a></li>
                     <%
                         if(isSelf){
                             out.println("<li><a href=\"#history\" role=\"tab\" data-toggle=\"tab\">My History</a></li>");
@@ -127,39 +126,34 @@
                                     out.println("<div class=\"ach-img col-md-2\">");
                                     out.println("<img data-src=\"holder.js/64x64\" src=\"../images/" + ach.getImage() + "\">");
                                     out.println("</div>");
-                                    out.println("<div class=\"media-body col-md-7\">");
+                                    out.println("<div class=\"media-body col-md-6\">");
                                     out.println("<h4 class=\"media-heading\">" + ach.getName() + "</h4>");
                                     out.println("<p>" + ach.getDescription() + "</p>");
                                     out.println("</div>");
-                                    out.println("<div class=\"date col-md-3\">");
+                                    out.println("<div class=\"date col-md-4\">");
                                     out.println("<span class=\"label label-success\">" + au.getTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "</span>");
                                     if(au.getTime().toLocalDateTime().toLocalDate().isEqual(LocalDate.now())){
-                                        out.println("<p class=\"label label-warning\">New !</p>");
+                                        out.println("<p class=\"label label-danger\">New !</p>");
+                                    }
+                                    if(ach.isHidden()){
+                                        out.println("<p class=\"label label-warning\">Hidden</p>");
                                     }
                                     out.println("</div></li>");
                                 }
-                            %>
-                        </ul>
-                    </div>
-
-                    <div class="tab-pane" id="allachievements">
-                        <div class="alert alert-info" role="alert">There are all the achievements you can get.</div>
-                        <ul class="media-list my-achievements row">
-                            <%
-                                for (Iterator it = all.iterator(); it.hasNext(); ) {
+                                for (Iterator it = notUserAch.iterator(); it.hasNext(); ) {
                                     Achievement ach = (Achievement) it.next();
                                     out.println("<li class=\"media col-md-10 col-md-offset-1 row\">\n");
-                                    out.println("<div class=\"ach-img col-md-2\">");
+                                    out.println("<div class=\"ach-img gray-img col-md-2\">");
                                     out.println("<img data-src=\"holder.js/64x64\" alt=\"64x64\" src=\"../images/");
                                     out.println(ach.isHidden() ? "hidden.png" : ach.getImage());
                                     out.println("\"></div>");
-                                    out.println("<div class=\"media-body col-md-7\">");
+                                    out.println("<div class=\"media-body col-md-6\">");
                                     out.println("<h4 class=\"media-heading\">");
                                     out.println(ach.isHidden() ? "???????" : ach.getName());
                                     out.println("</h4><p>");
                                     out.println(ach.isHidden() ? "????????????????????" : ach.getDescription());
                                     out.println("</p></div>");
-                                    out.println("<div class=\"date col-md-2\">");
+                                    out.println("<div class=\"date col-md-4\">");
                                     out.println("<span class=\"label label-info\">");
                                     out.println(ach.isHidden()?"?????":ach.getType());
                                     out.println("</span></div></li>");
@@ -167,7 +161,6 @@
                             %>
                         </ul>
                     </div>
-
                     <% if (isSelf) {
                         out.println("<div class=\"tab-pane\" id=\"history\">\n" +
                                 "<div class=\"alert alert-warning\" role=\"alert\">" +
