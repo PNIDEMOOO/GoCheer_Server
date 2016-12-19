@@ -37,5 +37,6 @@ public class SendMail {
         formData.add("to", email);
         formData.add("subject", "Achievement Message");
         formData.add("text",text);
+        webResource.post(ClientResponse.class,formData);
     }
 }

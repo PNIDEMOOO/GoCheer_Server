@@ -9,7 +9,7 @@
             <ul>
                 <li><a href="/index.jsp">HOME</a></li>
                 <li><a href="#">LEADERBOARD</a></li>
-                <ul class="y-right">
+                <ul class="navR pull-right">
                     <%
                         String user = (String)request.getSession().getAttribute("user");
                         if(user==null){

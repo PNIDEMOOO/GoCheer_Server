@@ -38,7 +38,7 @@ ul, ol, li {
 .menu ul li a {
     position: relative;
     display: block;
-    width: 111px;
+    width: 130px;
     height: 48px;
     font-size: 14px;
     text-decoration: none;
@@ -50,7 +50,7 @@ ul, ol, li {
 .menu ul li a span {
     position: absolute;
     left: 0;
-    width: 111px;
+    width: 130px;
 }
 
 .menu ul li a span.out {
@@ -72,11 +72,11 @@ ul, ol, li {
 #menu2 ul li a span.over {
     color: #FFF;
     height: 48px;
-    width: 111px;
+    width: 130px;
     background-color: darkorange;
 }
 
-.y-right{
-    float: right!important;
+.navR.pull-right{
+    margin-right: 50px;
 }
 
