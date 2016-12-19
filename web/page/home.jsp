@@ -61,7 +61,7 @@
                 <tbody>
                 <tr>
                     <td>Word</td>
-                    <td>Achievements</td>
+                    <td>Achievement</td>
                     <td>Score</td>
                 </tr>
                 </tbody>
@@ -127,16 +127,17 @@
                                     out.println("<img data-src=\"holder.js/64x64\" src=\"../images/" + ach.getImage() + "\">");
                                     out.println("</div>");
                                     out.println("<div class=\"media-body col-md-6\">");
-                                    out.println("<h4 class=\"media-heading\">" + ach.getName() + "</h4>");
-                                    out.println("<p>" + ach.getDescription() + "</p>");
+                                    out.println("<h4 class=\"media-heading\">" + ach.getName());
+
+                                    if(ach.isHidden()){
+                                        out.println("<span class=\"label label-warning\">Hidden</span>");
+                                    }
+                                    out.println("</h4><p>" + ach.getDescription() + "</p>");
                                     out.println("</div>");
                                     out.println("<div class=\"date col-md-4\">");
                                     out.println("<span class=\"label label-success\">" + au.getTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "</span>");
                                     if(au.getTime().toLocalDateTime().toLocalDate().isEqual(LocalDate.now())){
                                         out.println("<p class=\"label label-danger\">New !</p>");
-                                    }
-                                    if(ach.isHidden()){
-                                        out.println("<p class=\"label label-warning\">Hidden</p>");
                                     }
                                     out.println("</div></li>");
                                 }

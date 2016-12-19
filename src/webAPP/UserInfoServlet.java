@@ -21,12 +21,13 @@ public class UserInfoServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User currentUser = (User)request.getSession().getAttribute("user");
+        String currentUsername = (String) request.getSession().getAttribute("user");
+//        User currentUser = (User)request.getSession().getAttribute("user");
         String targetUsername = request.getParameter("username");
         JSONObject userinfo = new JSONObject();
 
         if(targetUsername==null){
-            userinfo.put("user",currentUser==null?null:currentUser.JSONInfo());
+            userinfo.put("user",currentUsername==null?null:UserDAO.getInstance().findById(currentUsername).JSONInfo());
         }
         else{
             User targetUser = UserDAO.getInstance().findById(targetUsername);
@@ -35,7 +36,7 @@ public class UserInfoServlet extends HttpServlet {
             }
             else{
                 JSONObject targetUserInfo = targetUser.JSONInfo();
-                if(currentUser==null || !currentUser.equals(targetUser)){
+                if(currentUsername==null || !currentUsername.equals(targetUser.getUsername())){
                     targetUserInfo.remove("email");
                 }
                 userinfo.put("user",targetUserInfo);

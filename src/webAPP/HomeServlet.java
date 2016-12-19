@@ -24,7 +24,7 @@ public class HomeServlet extends HttpServlet {
         String uri = request.getRequestURI();
         if(uri.equals("/home"))uri="/home/";
         String targetUsername = URLDecoder.decode(uri,"utf-8").substring(6);
-        User currentUser = (User)request.getSession().getAttribute("user");
+        String currentUser = (String)request.getSession().getAttribute("user");
         if(targetUsername.isEmpty()){
             response.sendRedirect("../error.jsp");
             return;
@@ -35,7 +35,7 @@ public class HomeServlet extends HttpServlet {
         }
         else{
             request.setAttribute("targetUser", targetUser);
-            request.setAttribute("isSelf",(currentUser!=null&&currentUser.equals(targetUser)));
+            request.setAttribute("isSelf",(currentUser!=null&&currentUser.equals(targetUsername)));
             request.getRequestDispatcher("/page/home.jsp").forward(request,response);
         }
     }

@@ -44,7 +44,7 @@ public class SignupServlet extends HttpServlet {
                 response.sendRedirect("/error.jsp");
             else {
                 HttpSession httpSession = request.getSession();
-                httpSession.setAttribute("user", user1);
+                httpSession.setAttribute("user", user1.getUsername());
                 Cookie cookie = new Cookie("sessionId", httpSession.getId());
                 response.addCookie(cookie);
                 request.getRequestDispatcher("/hello.jsp").forward(request, response);

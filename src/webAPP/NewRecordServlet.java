@@ -33,8 +33,8 @@ public class NewRecordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
+        String username = (String) request.getSession().getAttribute("user");
+        if (username == null) {
             JSONObject error = new JSONObject();
             error.put("error",1);
             error.put("message","Haven't log in");
@@ -42,6 +42,7 @@ public class NewRecordServlet extends HttpServlet {
             return;
         }
 
+        User user = UserDAO.getInstance().findById(username);
         String word = request.getParameter("word");
         word = word.toLowerCase();
         Pattern exp = Pattern.compile("([a-z]+)");
