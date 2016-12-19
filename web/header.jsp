@@ -1,3 +1,4 @@
+<%@ page import="dao.UserDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh-cn">
 <body>
@@ -17,7 +18,7 @@
                         }
                         else{
                             out.println("<li><a href=\"/login\">Log Out</a></li>");
-                            out.println("<li><a href=\"/home/"+user+"\">"+user+"</a></li>");
+                            out.println("<li><a href=\"/home/"+user+"\">"+ UserDAO.getInstance().findById(user).getAlias()+"</a></li>");
                         }
                     %>
                 </ul>
