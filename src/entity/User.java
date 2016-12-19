@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -87,6 +88,10 @@ public class User {
                     }
                     break;
                 // 在某些特殊的时刻
+                case "day":
+                    if(newRecord!=null&&newRecord.getDatetime().toLocalDateTime().getDayOfWeek()==Integer.parseInt(a.getCondition()))
+                    {
+                    }
                 // TODO: 添加各种成就的逻辑
                 default:
             }
