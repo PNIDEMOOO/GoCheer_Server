@@ -40,7 +40,7 @@
 <body>
 
 <jsp:include page="../header.jsp"/>
-<div class="container">
+<div class="main container">
     <div class="row">
 
         <div class="col-lg-3">
@@ -193,5 +193,7 @@
     </div>
 </div>
 <jsp:include page="../footer.jsp"/>
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="../js/header.js"></script>
 </body>
 </html>

@@ -1,15 +1,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%!
-    String src = "../images/logo.png";
-%>
 <html lang="zh-cn">
 <body>
-<!--这是页头-->
-<div class="header">
-    <a href="/index.jsp">
-        <span><img src="<%=request.getRequestURI().contains("home")?"../":""%>images/logo.png"> </span>
-    </a>
+<div class="menu">
+    <ul>
+        <li><a href="/index.jsp"><img src="/images/logo-min.png"></a></li>
+        <div id="menu2" class="menu">
+            <ul>
+                <li><a href="/index.jsp">HOME</a></li>
+                <li><a href="#">LEADERBOARD</a></li>
+                <ul class="y-right">
+                    <%
+                        String user = (String)request.getSession().getAttribute("user");
+                        if(user==null){
+                            out.println("<li><a href=\"/login\">Log In</a></li>");
+                            out.println("<li><a href=\"/signup\">Sign Up</a></li>");
+                        }
+                        else{
+                            out.println("<li><a href=\"/login\">Log Out</a></li>");
+                            out.println("<li><a href=\"/home/"+user+"\">"+user+"</a></li>");
+                        }
+                    %>
+                </ul>
+            </ul>
+        </div>
+    </ul>
 </div>
 </body>
 </html>
