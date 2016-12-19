@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.Query;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -41,4 +43,15 @@ public class RecordDAO extends BaseDAO<Record> {
         session.close();
         return result;
     }
+
+    public List getUserHistory(String username,String word)
+    {
+        Session session=getSession();
+        Query query=session.createQuery("from Record  where user=:username AND word=:word order by datetime desc");
+        query.setParameter("username",username);
+        List result=query.getResultList();
+        session.close();
+        return result;
+    }
+
 }
