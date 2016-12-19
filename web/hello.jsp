@@ -12,12 +12,12 @@
 </head>
 <body>
 <%
-    User user = (User)request.getSession().getAttribute("user");
-    if(user == null){
+    String username = (String)request.getSession().getAttribute("user");
+    if(username == null){
         response.sendRedirect("/login.jsp");
     }
     else{
-        out.println(user.getUsername());
+        out.println(username);
     }
 %>
 </body>

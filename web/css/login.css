@@ -1,8 +1,8 @@
 .jumbotron {
     background: url("../images/login_bg.png") left no-repeat;
     background-size: cover;
-    height: 350px;
-    margin-bottom:0;
+    height: 500px;
+    margin:0;
     padding:0;
 }
 .jumbotron .container{
@@ -14,8 +14,8 @@
 .input-container{
     background:none;
     width: 80%;
-    margin:auto;
     text-align:center;
+    margin: 20% auto auto;
 }
 
 .btn{

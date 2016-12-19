@@ -11,12 +11,15 @@
     <link rel="shortcut icon" href="images/logo.png" type=”image/x-icon”/>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
 </head>
 
 <body>
+<jsp:include page="header.jsp"/>
 <div id="jb1">
-    <button type="button" class="btn btn-default">Download GoCheer</button>
+    <a type="button"  href="GoCheer.crx" class="btn btn-default">Download GoCheer</a>
 </div>
 <div id="jb2">
     <img src="images/jb2.png">
@@ -24,7 +27,7 @@
     <img src="images/jb4.png">
     <img src="images/jb5.png">
 </div>
-
+<jsp:include page="footer.jsp"/>
 <script>
     function changeBg() {
         var bg=document.getElementById("jb1");
@@ -42,5 +45,7 @@
     changeBg();
 </script>
 
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/header.js"></script>
 </body>
 </html>

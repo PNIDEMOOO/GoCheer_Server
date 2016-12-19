@@ -6,6 +6,9 @@ import entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.Query;
+import java.util.List;
+
 /**
  * Created by Donggu on 2016/12/5.
  */
@@ -25,5 +28,17 @@ public class RecordDAO extends BaseDAO<Record> {
         return super.findById(Record.class, pk);
     }
 
-    // TODO: 添加根据用户名获取用户查词历史的函数。按时间先后排列
+    /**
+     * Get searching history of user.
+     * @param username username
+     * @return List of records in descend order.
+     */
+    public List getUserHistory(String username){
+        Session session = getSession();
+        Query query = session.createQuery("from Record where user = :username order by datetime desc");
+        query.setParameter("username", username);
+        List result = query.getResultList();
+        session.close();
+        return result;
+    }
 }

@@ -19,11 +19,9 @@
     <link rel="shortcut icon" href="images/logo.png" type=”image/x-icon”/>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/header.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
     <link href="css/signup.css" rel="stylesheet">
-    <link href="css/header.css" rel="stylesheet">
-    <link href="css/footer.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -80,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="header">
+            <div class="sign-up">
                 <span><button type="submit" class="btn btn-default">Sign up</button></span>
             </div>
         </form>
@@ -98,4 +96,6 @@
         }
     }
 </script>
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/header.js"></script>
 </html>

@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             }
             else{
                 HttpSession httpSession = request.getSession();
-                httpSession.setAttribute("user",user);
+                httpSession.setAttribute("user",user.getUsername());
                 response.getWriter().append("true");
             }
             return;
@@ -44,14 +44,15 @@ public class LoginServlet extends HttpServlet {
         }
         else{
             HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("user",user);
+            httpSession.setAttribute("user",user.getUsername());
             response.sendRedirect("/home/"+URLEncoder.encode(username,"utf-8"));
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User)request.getSession().getAttribute("user");
-        if(user!=null){
+        String username = (String)request.getSession().getAttribute("user");
+        if(username!=null){
+            User user = UserDAO.getInstance().findById(username);
             response.sendRedirect("/home/" + URLEncoder.encode(user.getUsername(),"utf-8"));
         }
         else{

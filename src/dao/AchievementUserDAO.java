@@ -54,10 +54,25 @@ public class AchievementUserDAO extends BaseDAO<AchievementUser> {
      * @return ArrayList of AchievementUser, sorted by time desc
      */
     public List getUserAchievements(String username){
-        Session session = BaseDAO.getSession();
+        Session session = getSession();
         Query query = session.createQuery("from AchievementUser where user = :username order by time desc");
         query.setParameter("username", username);
         List list = query.getResultList();
+        session.close();
+        return list;
+    }
+
+    /**
+     * get all Achievements which the user hasn't got, in type order.
+     * @param username username
+     * @return ArrayList of AchievementUser, sorted by type
+     */
+    public List getNotUserAchievements(String username){
+        Session session = getSession();
+        Query query = session.createQuery("FROM Achievement where id not in ( SELECT achievement FROM AchievementUser WHERE user = :username)order by hidden,type");
+        query.setParameter("username", username);
+        List list = query.getResultList();
+        session.close();
         return list;
     }
 }
