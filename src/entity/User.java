@@ -67,14 +67,12 @@ public class User {
      */
     public ArrayList<Integer> checkAchievement(Record newRecord){
         ArrayList<Integer> newAchievements = new ArrayList<>();
-        ArrayList<Integer> userAchievements = AchievementUserDAO.getInstance().findByUser(username);
         List achievements = BaseDAO.query("from Achievement");
+        List notUserAchievements = AchievementUserDAO.getInstance().getNotUserAchievements(this.username);
 
         // 遍历查看
-        for(Iterator it = achievements.iterator(); it.hasNext();){
+        for(Iterator it = notUserAchievements.iterator(); it.hasNext();){
             Achievement a = (Achievement)it.next();
-            // 判断用户是否已获得该成就
-            if(userAchievements.contains(a.getId())) continue;
             // 根据成就类型进行读取
             switch (a.getType()){
                 // 查询次数达到指定数量
@@ -89,7 +87,7 @@ public class User {
                         newAchievements.add(a.getId());
                     }
                     break;
-                // 在某些特殊的时刻
+                //在特定的星期几刷词获得成就
                 case "day":
                     if(newRecord!=null)
                     {
@@ -98,7 +96,7 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //在特定的星期几刷词获得成就
+                //在特定的日期刷词获得成就，一月一号在record的condition中存为0101
                 case "date":
                     if(newRecord!=null)
                     {
@@ -110,14 +108,15 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //在特定的日期刷词获得成就，一月一号在record的condition中存为0101
+                //在特定的时间点刷词获得成就
                 case "time":
                     if(newRecord!=null&&newRecord.getDatetime().toLocalDateTime().getHour()==Integer.parseInt(a.getCondition()))
                     {
                         newAchievements.add(a.getId());
                     }
                     break;
-                //在特定的时间点刷词获得成就
+                //在某个时间段重复查一个单词获得成就
+                // TODO: 感觉可以研究一下sql能不能完成日期比较（毕竟datetime是内置类型）。
                 case "duration & repeat count":
                     if(newRecord!=null)
                     {
@@ -138,7 +137,8 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //在某个时间段重复查一个单词获得成就
+                //重复刷某个词累计达到一个数值获得成就
+                // TODO: 算法优化：可以直接使用sql聚合函数count(*)获得数量
                 case "repeat count":
                     if(newRecord!=null)
                     {
@@ -152,7 +152,8 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //重复刷某个词累计达到一个数值获得成就
+                //在特定的星期几的某个时刻划词获得成就
+                // TODO: 不必检测newrecord非空，因为不是所有的查询都有record产生，但可以计入成就。
                 case "day & time":
                     if(newRecord!=null)
                     {
@@ -162,7 +163,7 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //在特定的星期几的某个时刻划词获得成就
+                //在特定的日期划到了一定量的词获得成就
                 case "date & wordsum":
                     if(newRecord!=null)
                     {
@@ -174,7 +175,7 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //在特定的日期划到了一定量的词获得成就
+                //在某个时刻划到了一定量的词获得成就
                 case "time & wordsum":
                     if(newRecord!=null)
                     {
@@ -184,7 +185,7 @@ public class User {
                         }
                     }
                     break;
-                //在某个时刻划到了一定量的词获得成就
+                //在特定的日期时间划词获得了成就
                 case "date & time":
                     if(newRecord!=null)
                     {
@@ -196,7 +197,7 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //在特定的日期时间划词获得了成就
+                //在特定的日子刷到了特定的词语获得成就
                 case "date & specific word":
                     if(newRecord!=null)
                     {
@@ -208,7 +209,7 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                //在特定的日子刷到了特定的词语获得成就
+                //在指定时间内查够了一定量的单词获得成就
                 case "duration & wordsum":
                     if(newRecord!=null)
                     {
@@ -229,8 +230,6 @@ public class User {
                             newAchievements.add(a.getId());
                     }
                     break;
-                   //在指定时间内查够了一定量的单词获得成就
-                // TODO: 添加各种成就的逻辑
                 default:
             }
         }
