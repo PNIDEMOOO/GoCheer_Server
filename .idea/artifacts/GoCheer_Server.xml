@@ -8,9 +8,9 @@
           <element id="module-output" name="GoCheer_Server" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="mysql-connector-java-5.1.40-bin" />
-          <element id="library" level="project" name="Hibernate" />
           <element id="library" level="project" name="jersey-bundle-1.19.1" />
+          <element id="library" level="project" name="Hibernate" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.40-bin" />
           <element id="library" level="project" name="json-simple-1.1.1" />
         </element>
       </element>

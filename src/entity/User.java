@@ -2,12 +2,14 @@ package entity;
 
 import dao.AchievementUserDAO;
 import dao.BaseDAO;
+import dao.RecordDAO;
 import org.json.simple.JSONObject;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -89,9 +91,145 @@ public class User {
                     break;
                 // 在某些特殊的时刻
                 case "day":
-                    if(newRecord!=null&&newRecord.getDatetime().toLocalDateTime().getDayOfWeek()==Integer.parseInt(a.getCondition()))
+                    if(newRecord!=null)
                     {
+                        String dayOfWeek=newRecord.getDatetime().toLocalDateTime().getDayOfWeek().toString();
+                        if(dayOfWeek.equals(a.getCondition()))
+                            newAchievements.add(a.getId());
                     }
+                    break;
+                //在特定的星期几刷词获得成就
+                case "date":
+                    if(newRecord!=null)
+                    {
+                        int month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
+                        int day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
+                        int m=Integer.parseInt(a.getCondition().substring(0,2));
+                        int d=Integer.parseInt(a.getCondition().substring(2,4));
+                        if(month==m&&day==d)
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                //在特定的日期刷词获得成就，一月一号在record的condition中存为0101
+                case "time":
+                    if(newRecord!=null&&newRecord.getDatetime().toLocalDateTime().getHour()==Integer.parseInt(a.getCondition()))
+                    {
+                        newAchievements.add(a.getId());
+                    }
+                    break;
+                //在特定的时间点刷词获得成就
+                case "duration & repeat count":
+                    if(newRecord!=null)
+                    {
+                        List userHistory=RecordDAO.getInstance().getUserHistory(username,newRecord.getWord());
+
+                        int count=0;
+                        LocalDateTime t=newRecord.getDatetime().toLocalDateTime().minusHours(Long.parseLong(a.getCondition()));
+
+                        for(Iterator i=userHistory.iterator();i.hasNext();)
+                        {
+                            Record r=(Record)i.next();
+
+                            if(r.getDatetime().toLocalDateTime().isAfter(t))
+                                count++;
+                        }
+
+                        if(count==Integer.parseInt(a.getCondition2()))
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                //在某个时间段重复查一个单词获得成就
+                case "repeat count":
+                    if(newRecord!=null)
+                    {
+                        List userHistory=RecordDAO.getInstance().getUserHistory(username,newRecord.getWord());
+
+                        int count=0;
+                        for(Iterator i=userHistory.iterator();i.hasNext();)
+                            count++;
+
+                        if(count==Integer.parseInt(a.getCondition()))
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                //重复刷某个词累计达到一个数值获得成就
+                case "day & time":
+                    if(newRecord!=null)
+                    {
+                        String dayOfWeek=newRecord.getDatetime().toLocalDateTime().getDayOfWeek().toString();
+
+                        if(dayOfWeek.equals(a.getCondition())&&newRecord.getDatetime().toLocalDateTime().getHour()==Integer.parseInt(a.getCondition()))
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                //在特定的星期几的某个时刻划词获得成就
+                case "date & wordsum":
+                    if(newRecord!=null)
+                    {
+                        int month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
+                        int day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
+                        int m=Integer.parseInt(a.getCondition().substring(0,2));
+                        int d=Integer.parseInt(a.getCondition().substring(2,4));
+                        if(month==m&&day==d&&this.wordsum >= Integer.parseInt(a.getCondition()))
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                //在特定的日期划到了一定量的词获得成就
+                case "time & wordsum":
+                    if(newRecord!=null)
+                    {
+                        if(newRecord.getDatetime().toLocalDateTime().getHour()==Integer.parseInt(a.getCondition())&&this.wordsum >= Integer.parseInt(a.getCondition()))
+                        {
+                            newAchievements.add(a.getId());
+                        }
+                    }
+                    break;
+                //在某个时刻划到了一定量的词获得成就
+                case "date & time":
+                    if(newRecord!=null)
+                    {
+                        int month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
+                        int day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
+                        int m=Integer.parseInt(a.getCondition().substring(0,2));
+                        int d=Integer.parseInt(a.getCondition().substring(2,4));
+                        if(month==m&&day==d&&newRecord.getDatetime().toLocalDateTime().getHour()==Integer.parseInt(a.getCondition()))
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                //在特定的日期时间划词获得了成就
+                case "date & specific word":
+                    if(newRecord!=null)
+                    {
+                        int month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
+                        int day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
+                        int m=Integer.parseInt(a.getCondition().substring(0,2));
+                        int d=Integer.parseInt(a.getCondition().substring(2,4));
+                        if(month==m&&day==d&&newRecord.getWord().equals(a.getCondition()))
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                //在特定的日子刷到了特定的词语获得成就
+                case "duration & wordsum":
+                    if(newRecord!=null)
+                    {
+                        List userHistory=RecordDAO.getInstance().getUserHistory(username);
+
+                        int sum=0;
+                        LocalDateTime t=newRecord.getDatetime().toLocalDateTime().minusHours(Long.parseLong(a.getCondition()));
+
+                        for(Iterator i=userHistory.iterator();i.hasNext();)
+                        {
+                            Record r=(Record)i.next();
+
+                            if(r.getDatetime().toLocalDateTime().isAfter(t))
+                                sum++;
+                        }
+
+                        if(sum==Integer.parseInt(a.getCondition2()))
+                            newAchievements.add(a.getId());
+                    }
+                    break;
+                   //在指定时间内查够了一定量的单词获得成就
                 // TODO: 添加各种成就的逻辑
                 default:
             }
