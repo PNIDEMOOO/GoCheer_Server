@@ -28,10 +28,10 @@
 %>
 <div class="leader-board container">
     <div class="row  col-md-10 col-md-offset-1">
-        <div class="hint panel panel-danger">
+        <div class="hint panel panel-info">
             <div class="panel-heading">
                 <span>Here is the leader board.</span>
-                <a href="#user" id="user-hint" class="pull-right">MY POSITION</a>
+                <a href="#user" id="user-hint" class="pull-right"><B>MY POSITION</B></a>
             </div>
         </div>
         <%
@@ -82,5 +82,10 @@
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="js/header.js"></script>
+<script>
+    if(document.getElementById("user")==null){
+        $("#user-hint").hide();
+    }
+</script>
 </body>
 </html>
