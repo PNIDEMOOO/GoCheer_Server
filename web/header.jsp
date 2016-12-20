@@ -8,7 +8,7 @@
         <div id="menu2" class="menu">
             <ul>
                 <li><a href="/index.jsp">HOME</a></li>
-                <li><a href="#">LEADERBOARD</a></li>
+                <li><a href="/leaderboard.jsp">LEADERBOARD</a></li>
                 <ul class="navR pull-right">
                     <%
                         String user = (String)request.getSession().getAttribute("user");
@@ -17,7 +17,7 @@
                             out.println("<li><a href=\"/signup\">Sign Up</a></li>");
                         }
                         else{
-                            out.println("<li><a href=\"/login\">Log Out</a></li>");
+                            out.println("<li><a href=\"/logout\">Log Out</a></li>");
                             out.println("<li><a href=\"/home/"+user+"\">"+ UserDAO.getInstance().findById(user).getAlias()+"</a></li>");
                         }
                     %>

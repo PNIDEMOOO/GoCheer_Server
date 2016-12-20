@@ -100,7 +100,7 @@
                     </span>
                 </div>
             </div>
-            <button type="button" class="btn btn-danger btn-lg btn-block">View Leaderboard</button>
+            <a type="button" href="../leaderboard.jsp" class="btn btn-danger btn-lg btn-block">View Leaderboard</a>
         </div>
 
         <div class="col-lg-9">
