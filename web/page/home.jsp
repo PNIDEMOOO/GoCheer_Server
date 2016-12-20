@@ -100,7 +100,7 @@
                     </span>
                 </div>
             </div>
-            <button type="button" class="btn btn-danger btn-lg btn-block">View Leaderboard</button>
+            <a type="button" href="../leaderboard.jsp" class="btn btn-danger btn-lg btn-block">View Leaderboard</a>
         </div>
 
         <div class="col-lg-9">
@@ -110,6 +110,7 @@
                     <%
                         if(isSelf){
                             out.println("<li><a href=\"#history\" role=\"tab\" data-toggle=\"tab\">My History</a></li>");
+                            out.println("<li><a href=\"#settings\" role=\"tab\" data-toggle=\"tab\">Settings</a></li>");
                         }
                     %>
                 </ul>
@@ -163,15 +164,16 @@
                         </ul>
                     </div>
                     <% if (isSelf) {
+                        // History
                         out.println("<div class=\"tab-pane\" id=\"history\">\n" +
                                 "<div class=\"alert alert-warning\" role=\"alert\">" +
                                 "There are all the words you have checked.</div>\n" +
                                 "<ul class=\"media-list\">");
                         LocalDate date = null;
-                        for (Iterator it = history.iterator(); it.hasNext();) {
+                        for (Iterator it = history.iterator(); it.hasNext(); ) {
                             Record record = (Record) it.next();
                             if (date == null || !date.equals(record.getDatetime().toLocalDateTime().toLocalDate())) {
-                                if(date!=null){
+                                if (date != null) {
                                     out.println("</div></li>");
                                 }
                                 date = record.getDatetime().toLocalDateTime().toLocalDate();
@@ -181,11 +183,20 @@
                                 out.println(date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd")));
                                 out.println("</span></div><div class=\"media-body\">");
                             }
-                            out.println("<span class=\"badge badge-lg\">"+record.getWord()+"</span>");
+                            out.println("<span class=\"badge badge-lg\">" + record.getWord() + "</span>");
                         }
-                        out.println("</div></li>");
+                        if(!history.isEmpty()){
+                            out.println("</div></li>");
+                        }
                         out.println("</ul></div>");
-                    }%>
+                    }
+                    %>
+                    <%
+                        if(isSelf){
+                            %><jsp:include page="settings.jsp"/><%
+                        }
+                    %>
+
                 </div>
             </div>
 

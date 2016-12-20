@@ -73,3 +73,11 @@ span.glyphicon{
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+#settings form{
+    margin-top: 60px;
+}
+
+.update{
+    text-align: center;
+}

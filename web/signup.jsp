@@ -79,7 +79,7 @@
             </div>
 
             <div class="sign-up">
-                <span><button type="submit" class="btn btn-default">Sign up</button></span>
+                <span><button type="submit" id="btn-signup" class="btn btn-default">Sign up</button></span>
             </div>
         </form>
     </div>
@@ -90,9 +90,11 @@
     function check() {
         if (document.getElementById("inputPassword3").value !=
                 document.getElementById("inputConfirm3").value) {
-            document.getElementById("warning").innerHTML = "   两次密码的输入不一致";
+            document.getElementById("warning").innerHTML = "   The two passwords do not match.";
+            document.getElementById("btn-signup").setAttribute("disabled","disabled");
         } else {
             document.getElementById("warning").innerHTML = "   ";
+            document.getElementById("btn-signup").removeAttribute("disabled");
         }
     }
 </script>
