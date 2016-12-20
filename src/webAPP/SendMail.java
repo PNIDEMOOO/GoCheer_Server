@@ -21,7 +21,9 @@ public class SendMail {
         String alas=user.getAlias();
         String email=user.getEmail();
         String text_title="Dear "+alas+"\n.";
-        String text_content="Congratulations on obtaining the achievement "+achievement.getName()+"\n.";
+        String text_content="Congratulations on obtaining the "
+                +(achievement.isHidden()?"hidden ":"")+"achievement "
+                +achievement.getName()+":\n "+achievement.getDescription()+"\n";
         String text_end="Hope you make persistent efforts!\n";
         String text=text_title+text_content+text_end;
         
@@ -33,9 +35,9 @@ public class SendMail {
 
 
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
-        formData.add("from", "Mailgun Sandbox <postmaster@gocheer.donggu.me>");
+        formData.add("from", "GoCheer Achievements <postmaster@gocheer.donggu.me>");
         formData.add("to", email);
-        formData.add("subject", "Achievement Message");
+        formData.add("subject", "New GoCheer achievement: "+achievement.getName()+"\n.");
         formData.add("text",text);
         webResource.post(ClientResponse.class,formData);
     }
