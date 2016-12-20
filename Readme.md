@@ -2,6 +2,11 @@
 > 枸杞的后端逻辑
 
 [TOC]
+## TODO
+- 获取全服用户列表，按总分排序
+- 获取全服成就列表，按类型排序
+- 获取用户查词历史，按时间排序，按天分组
+
 ## 接口
 ### `/checkUsername`用户名查重  
 检测用户名是否已存在。
@@ -125,6 +130,16 @@
         extension: <extension>
 
 使用 POST 方法，如果是来自插件的请求则`extension`值为`"true"`，其它则不需要这个键。若来自插件则什么都不会返回。  
+
+### `/update`修改用户信息
+    gocheer.donggu.me/update
+    form-data:
+        alias: <new alias>
+        password: <new password>
+        email: <new email>
+        gender: <new gender>
+
+使用 POST 方法，表单某些项如果没有填的话可以不发没关系。将当前登录用户的相关信息修改，并刷新当前页面。如果未登录的话会跳转登录页。`gender`男为`true`，女为`false`。  
 
 ## 后端架构
 ### ORM层 `/src/entity`

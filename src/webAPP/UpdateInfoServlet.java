@@ -18,7 +18,7 @@ public class UpdateInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String)request.getSession().getAttribute("user");
         if(username==null){
-            response.sendRedirect("../login");
+            response.sendRedirect("../login.jsp");
             return;
         }
         request.setCharacterEncoding("UTF-8");
