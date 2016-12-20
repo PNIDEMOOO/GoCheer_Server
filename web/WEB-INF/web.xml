@@ -39,6 +39,10 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>webAPP.HomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateInfoServlet</servlet-name>
+        <servlet-class>webAPP.UpdateInfoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -68,5 +72,9 @@
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInfoServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
     </servlet-mapping>
 </web-app>
