@@ -40,7 +40,7 @@ public class UpdateInfoServlet extends HttpServlet {
             user.setGender(Boolean.parseBoolean(gender));
         }
         UserDAO.getInstance().update(user);
-        response.sendRedirect(request.getRequestURL().toString());
+        response.sendRedirect("/home/"+username);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
