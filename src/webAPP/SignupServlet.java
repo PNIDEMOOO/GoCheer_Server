@@ -17,8 +17,6 @@ import java.io.IOException;
 @WebServlet(name = "SignupServlet")
 public class SignupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String gender=request.getParameter("gender");
@@ -47,7 +45,7 @@ public class SignupServlet extends HttpServlet {
                 httpSession.setAttribute("user", user1.getUsername());
                 Cookie cookie = new Cookie("sessionId", httpSession.getId());
                 response.addCookie(cookie);
-                request.getRequestDispatcher("/hello.jsp").forward(request, response);
+                request.getRequestDispatcher("/login").forward(request, response);
             }
         }
     }

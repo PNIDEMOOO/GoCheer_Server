@@ -38,7 +38,7 @@ public class UserDAO extends BaseDAO<User> {
      */
     public List getLeaderboard(){
         Session session = getSession();
-        List result = session.createQuery("from User order by score desc, username").list();
+        List result = session.createQuery("from User order by score desc, alias").list();
         session.close();
         return result;
     }

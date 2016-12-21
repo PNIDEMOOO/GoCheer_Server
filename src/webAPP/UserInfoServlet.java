@@ -22,7 +22,6 @@ public class UserInfoServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String currentUsername = (String) request.getSession().getAttribute("user");
-//        User currentUser = (User)request.getSession().getAttribute("user");
         String targetUsername = request.getParameter("username");
         JSONObject userinfo = new JSONObject();
 
@@ -43,7 +42,6 @@ public class UserInfoServlet extends HttpServlet {
             }
         }
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
         response.getWriter().append(userinfo.toJSONString());
     }
 }

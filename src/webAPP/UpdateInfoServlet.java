@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * Created by Donggu on 2016/12/20.
@@ -21,7 +22,6 @@ public class UpdateInfoServlet extends HttpServlet {
             response.sendRedirect("../login.jsp");
             return;
         }
-        request.setCharacterEncoding("UTF-8");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
@@ -40,7 +40,8 @@ public class UpdateInfoServlet extends HttpServlet {
             user.setGender(Boolean.parseBoolean(gender));
         }
         UserDAO.getInstance().update(user);
-        response.sendRedirect("/home/"+username);
+        username = URLEncoder.encode(username, "utf-8");
+        response.sendRedirect("home/"+username);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

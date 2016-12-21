@@ -129,7 +129,6 @@ public class User {
                         {
                             int count = 0;
                             LocalDateTime t = newRecord.getDatetime().toLocalDateTime().minusHours((long)duration);
-
                             for (Iterator i = userHistory.iterator(); i.hasNext(); )
                             {
                                 Record r = (Record) i.next();
