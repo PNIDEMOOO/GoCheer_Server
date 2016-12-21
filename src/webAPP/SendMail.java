@@ -12,70 +12,53 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  * Created by orient on 2016/12/11.
  */
-public class SendMail  implements  Runnable{
+public class SendMail{
 
-    private User user;
-    private Achievement achievement;
-    private HttpServletRequest request;
-    private  HttpServletResponse response;
+    private static WebResource webResource;
 
-
-    public SendMail(User user, Achievement achievement,HttpServletRequest request, HttpServletResponse response)
+    static
     {
-        this.achievement=achievement;
-        this.user=user;
-        this.request=request;
-        this.response=response;
+        Client client=Client.create();
+        client.addFilter(new HTTPBasicAuthFilter("api",
+                "key-77ed9a5a192dd6c5b90591b027c769b1"));
+        webResource = client.resource("https://api.mailgun.net/v3/gocheer.donggu.me/messages");
     }
 
-    public void run()
-    {
+    private static class Mailing implements Runnable{
+        WebResource webResource;
+        User user;
+        Achievement achievement;
 
-        Client client=(Client)request.getSession().getAttribute("client");
-
-        if(client==null) {
-            client = Client.create();
-            client.addFilter(new HTTPBasicAuthFilter("api",
-                    "key-77ed9a5a192dd6c5b90591b027c769b1"));
-            request.getSession().setAttribute("client",client);
-            String alas=user.getAlias();
-            String email=user.getEmail();
-            String text_title="Dear "+alas+"\n.";
-            String text_end="Hope you make persistent efforts!\n";
-            request.getSession().setAttribute("alas",alas);
-            request.getSession().setAttribute("email",email);
-            request.getSession().setAttribute("text_title",text_title);
-            request.getSession().setAttribute("text_end",text_end);
+        public Mailing(WebResource webResource, User user, Achievement achievement) {
+            this.webResource = webResource;
+            this.user = user;
+            this.achievement = achievement;
         }
-        WebResource webResource =
-                    client.resource("https://api.mailgun.net/v3/gocheer.donggu.me/messages");
-        String alas=(String)request.getSession().getAttribute("alas");
-        String email=(String)request.getSession().getAttribute("email");
-        String text_title=(String )request.getSession().getAttribute("text_title");
 
-        String text_content="Congratulations on obtaining the "
-                +(achievement.isHidden()?"hidden ":"")+"achievement "
-                +achievement.getName()+":\n "+achievement.getDescription()+"\n";
+        @Override
+        public void run() {
+            String text_title="Dear "+user.getAlias()+"\n.";
+            String text_end="Hope you make persistent efforts!\n";
 
-        String text_end=(String)request.getSession().getAttribute("text_end");
+            String text_content="Congratulations on obtaining the "
+                    +(achievement.isHidden()?"hidden ":"")+"achievement "
+                    +achievement.getName()+":\n "+achievement.getDescription()+"\n";
+            String text=text_title+text_content+text_end;
 
-        String text=text_title+text_content+text_end;
-
-        MultivaluedMapImpl formData = new MultivaluedMapImpl();
-        formData.add("from", "GoCheer Achievements <postmaster@gocheer.donggu.me>");
-        formData.add("to", email);
-        formData.add("subject", "New GoCheer achievement: "+achievement.getName()+"\n.");
-        formData.add("text",text);
-
-        webResource.post(ClientResponse.class,formData);
+            MultivaluedMapImpl formData = new MultivaluedMapImpl();
+            formData.add("from", "GoCheer Achievements <postmaster@gocheer.donggu.me>");
+            formData.add("to", user.getEmail());
+            formData.add("subject", "New GoCheer achievement: "+achievement.getName()+"\n.");
+            formData.add("text",text);
+            webResource.post(ClientResponse.class,formData);
+        }
     }
 
-    public static void SendCongratulations(User user, Achievement achievement,HttpServletRequest request, HttpServletResponse response){
-          new Thread(new SendMail(user,achievement,request,response)).start();
+    static void SendCongratulations(User user, Achievement achievement){
+          new Thread(new Mailing(webResource,user,achievement)).start();
     }
 
 }
