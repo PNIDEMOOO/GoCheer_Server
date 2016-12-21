@@ -47,19 +47,15 @@ public class RecordDAO extends BaseDAO<Record> {
         return result;
     }
 
-    public boolean getRepeatCount(String username, String word, int count)
+    public int getRepeatCount(String username, String word)
     {
         Session session=getSession();
         Query query=session.createQuery("from Record where user=:username AND word=:word order by datetime desc");
         query.setParameter("username",username);
         query.setParameter("word",word);
         List list = query.getResultList();
-//        iterator().next();equals(count);
-        int c = list.size();
-        if(c==count)
-            return true;
-        else
-            return false;
+        session.close();
+        return list.size();
     }
 
     public List getUserHistory(String username,String word)
