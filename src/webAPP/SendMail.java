@@ -17,7 +17,9 @@ import javax.ws.rs.core.MediaType;
  */
 public class SendMail {
 
-    public static  void SendCongratulations(User user, Achievement achievement){
+    public static void SendCongratulations(User user, Achievement achievement){
+        // TODO: 新开线程来进行发邮件操作
+        // TODO: 可以将固定不变的初始化部分缓存起来（比如client什么的）
         String alas=user.getAlias();
         String email=user.getEmail();
         String text_title="Dear "+alas+"\n.";
