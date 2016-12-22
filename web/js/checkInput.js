@@ -95,14 +95,14 @@ function isUsername( username ){
     if( /^\d.*$/.test( username ) ){
         return 1;
     }
-    if(! /^.{6,20}$/.test( username ) ){
-        return 2;
-    }
     if(! /^[\w_]*$/.test( username ) ){
         return 3;
     }
     if(! /^([a-z]|[A-Z])[\w_]{5,19}$/.test( username ) ){
         return 4;
+    }
+    if(! /^.{6,20}$/.test( username ) ){
+        return 2;
     }
     if(!sendRequest(username)){
         return 5;
