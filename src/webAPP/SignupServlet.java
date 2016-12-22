@@ -1,11 +1,8 @@
 package webAPP;
 
-import dao.RecordDAO;
 import dao.UserDAO;
-import entity.Record;
 import entity.User;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;

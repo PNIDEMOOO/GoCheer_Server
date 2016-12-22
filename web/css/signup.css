@@ -21,3 +21,10 @@
 .sign-up{
     text-align: center;
 }
+
+.col-md-4.warn {
+    margin-top: 0.5em;
+    color: #ff6000;
+    font-size: 14px;
+    font-family: "微软雅黑",sans-serif;
+}

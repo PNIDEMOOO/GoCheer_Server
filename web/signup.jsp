@@ -32,7 +32,10 @@
                 <label for="inputUsername3" class="col-md-4 control-label">Username</label>
                 <div class="col-md-4">
                     <input name="username" type="username" class="form-control" id="inputUsername3"
-                           placeholder="Username">
+                           placeholder="Username" onblur="checkUsername()">
+                </div>
+                <div class="col-md-4 warn">
+                    <span id="warning3"></span>
                 </div>
             </div>
 
@@ -40,7 +43,10 @@
                 <label for="inputPassword3" class="col-md-4 control-label">Password</label>
                 <div class="col-md-4">
                     <input name="password" type="password" class="form-control" id="inputPassword3"
-                           placeholder="Password">
+                           placeholder="Password" onblur="checkPassword()">
+                </div>
+                <div class="col-md-4 warn">
+                    <span id="warning4"></span>
                 </div>
             </div>
 
@@ -49,7 +55,9 @@
                 <div class="col-md-4">
                     <input type="password" class="form-control" id="inputConfirm3" placeholder="Confirm Password"
                            onblur="check()">
-                    <span id="warning">   </span>
+                </div>
+                <div class="col-md-4 warn">
+                    <span id="warning"></span>
                 </div>
             </div>
 
@@ -58,46 +66,53 @@
                 <label for="inputConfirm3" class="col-md-4 control-label">Gender</label>
                 <div class="col-md-4">
                     <label class="radio-inline">
-                        <input type="radio" name="gender" id="inlineRadio1" value="1"> Male
+                        <input type="radio" name="gender" id="inlineRadio1" value="1" onclick="checkForButton()"> Male
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="gender" id="inlineRadio2" value="0"> Female
+                        <input type="radio" name="gender" id="inlineRadio2" value="0" onclick="checkForButton()"> Female
                     </label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputNickname3" class="col-md-4 control-label">Nickname</label>
                 <div class="col-md-4">
-                    <input name="alias" type="name" class="form-control" id="inputNickname3" placeholder="Nickname">
+                    <input name="alias" type="name" class="form-control" id="inputNickname3" placeholder="Nickname" onblur="checkNickname()">
+                </div>
+                <div class="col-md-4 warn">
+                    <span id="warning2"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-md-4 control-label">Email</label>
                 <div class="col-md-4">
-                    <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email" onblur="checkEmail()">
+                </div>
+                <div class="col-md-4 warn">
+                    <span id="warning5"></span>
                 </div>
             </div>
 
             <div class="sign-up">
-                <span><button type="submit" id="btn-signup" class="btn btn-default">Sign up</button></span>
+                <span><button type="submit" id="btn-signup" class="btn btn-default" disabled="true">Sign up</button></span>
             </div>
         </form>
     </div>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>
-<script>
-    function check() {
-        if (document.getElementById("inputPassword3").value !=
-                document.getElementById("inputConfirm3").value) {
-            document.getElementById("warning").innerHTML = "   The two passwords do not match.";
-            document.getElementById("btn-signup").setAttribute("disabled","disabled");
-        } else {
-            document.getElementById("warning").innerHTML = "   ";
-            document.getElementById("btn-signup").removeAttribute("disabled");
-        }
-    }
-</script>
+<%--<script>--%>
+    <%--function check() {--%>
+        <%--if (document.getElementById("inputPassword3").value !=--%>
+                <%--document.getElementById("inputConfirm3").value) {--%>
+            <%--document.getElementById("warning").innerHTML = "   The two passwords do not match.";--%>
+            <%--document.getElementById("btn-signup").setAttribute("disabled","disabled");--%>
+        <%--} else {--%>
+            <%--document.getElementById("warning").innerHTML = "   ";--%>
+            <%--document.getElementById("btn-signup").removeAttribute("disabled");--%>
+        <%--}--%>
+    <%--}--%>
+<%--</script>--%>
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/header.js"></script>
+<script src="js/checkInput.js"></script>
 </html>
