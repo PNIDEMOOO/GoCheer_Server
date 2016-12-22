@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * Created by Donggu on 2016/12/11.
  */
 @Entity
-public class Achievement {
+public class Achievement implements JSONable{
     private int id;
     private String name;
     private String description;
@@ -33,6 +33,7 @@ public class Achievement {
         json.put("description", description);
         json.put("image", image);
         json.put("hidden", hidden);
+        json.put("bonus",score);
 
         return json;
     }

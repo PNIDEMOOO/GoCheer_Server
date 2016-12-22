@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Donggu on 2016/12/10.
  */
 @Entity
-public class User {
+public class User implements JSONable {
     private String username;
     private String password;
     private boolean gender;

@@ -70,7 +70,8 @@
                 <div class="list-group-item">
                     <span class="glyphicon glyphicon-user"></span>
                     <span id="name"><B><%=target.getAlias()%></B></span>
-                    <span class="badge badge-<%=target.isGender()?"male":"female"%>" id="gender"><%=target.isGender() ? "♂" : "♀"%></span>
+                    <span class="badge badge-<%=target.isGender()?"male":"female"%>"
+                          id="gender"><%=target.isGender() ? "♂" : "♀"%></span>
                 </div>
                 <%
                     if (isSelf) {
@@ -106,9 +107,11 @@
         <div class="col-lg-9">
             <div class="bs-example">
                 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                    <li class="active"><a href="#achievement" role="tab" data-toggle="tab"><%=isSelf?"My":(target.isGender()?"His":"Her")%> Achievements</a></li>
+                    <li class="active"><a href="#achievement" role="tab"
+                                          data-toggle="tab"><%=isSelf ? "My" : (target.isGender() ? "His" : "Her")%>
+                        Achievements</a></li>
                     <%
-                        if(isSelf){
+                        if (isSelf) {
                             out.println("<li><a href=\"#history\" role=\"tab\" data-toggle=\"tab\">My History</a></li>");
                             out.println("<li><a href=\"#settings\" role=\"tab\" data-toggle=\"tab\">Settings</a></li>");
                         }
@@ -117,7 +120,7 @@
                 <div id="myTabContent" class="tab-content">
 
                     <div class="tab-pane active" id="achievement">
-                        <div class="alert alert-success" role="alert">There are the achievements you have got.</div>
+                        <div class="alert alert-info" role="alert">Here are the achievements you have got.</div>
                         <ul class="media-list my-achievements row">
                             <%
                                 for (Iterator it = userAchievements.iterator(); it.hasNext(); ) {
@@ -130,14 +133,14 @@
                                     out.println("<div class=\"media-body col-md-6\">");
                                     out.println("<h4 class=\"media-heading\">" + ach.getName());
 
-                                    if(ach.isHidden()){
+                                    if (ach.isHidden()) {
                                         out.println("<span class=\"label label-warning\">Hidden</span>");
                                     }
                                     out.println("</h4><p>" + ach.getDescription() + "</p>");
                                     out.println("</div>");
                                     out.println("<div class=\"date col-md-4\">");
                                     out.println("<span class=\"label label-success\">" + au.getTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")) + "</span>");
-                                    if(au.getTime().toLocalDateTime().toLocalDate().isEqual(LocalDate.now())){
+                                    if (au.getTime().toLocalDateTime().toLocalDate().isEqual(LocalDate.now())) {
                                         out.println("<p class=\"label label-danger\">New !</p>");
                                     }
                                     out.println("</div></li>");
@@ -157,7 +160,7 @@
                                     out.println("</p></div>");
                                     out.println("<div class=\"date col-md-4\">");
                                     out.println("<span class=\"label label-info\">");
-                                    out.println(ach.isHidden()?"?????":ach.getType());
+                                    out.println(ach.isHidden() ? "?????" : ach.getType());
                                     out.println("</span></div></li>");
                                 }
                             %>
@@ -167,7 +170,7 @@
                         // History
                         out.println("<div class=\"tab-pane\" id=\"history\">\n" +
                                 "<div class=\"alert alert-warning\" role=\"alert\">" +
-                                "There are all the words you have checked.</div>\n" +
+                                "Here are all the words you have checked.</div>\n" +
                                 "<ul class=\"media-list\">");
                         LocalDate date = null;
                         for (Iterator it = history.iterator(); it.hasNext(); ) {
@@ -185,15 +188,17 @@
                             }
                             out.println("<span class=\"badge badge-lg\">" + record.getWord() + "</span>");
                         }
-                        if(!history.isEmpty()){
+                        if (!history.isEmpty()) {
                             out.println("</div></li>");
                         }
                         out.println("</ul></div>");
                     }
                     %>
                     <%
-                        if(isSelf){
-                            %><jsp:include page="settings.jsp"/><%
+                        if (isSelf) {
+                    %>
+                    <jsp:include page="settings.jsp"/>
+                    <%
                         }
                     %>
 

@@ -9,19 +9,20 @@
 <html>
 <body>
 <div class="tab-pane" id="settings">
+    <div class="alert alert-success" role="alert">Please input the blocks you want to update.</div>
     <form class="form-horizontal" role="form" action="../update" method="post">
         <div class="form-group">
-            <label for="inputPassword3" class="col-md-4 control-label">Password</label>
+            <label for="inputPassword3" class="col-md-4 control-label">New Password</label>
             <div class="col-md-4">
                 <input name="password" type="password" class="form-control" id="inputPassword3"
-                       placeholder="Password">
+                       placeholder="New Password">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="inputConfirm3" class="col-md-4 control-label">Confirm Password</label>
+            <label for="inputConfirm3" class="col-md-4 control-label">Confirm New Password</label>
             <div class="col-md-4">
-                <input type="password" class="form-control" id="inputConfirm3" placeholder="Confirm Password"
+                <input type="password" class="form-control" id="inputConfirm3" placeholder="Confirm New Password"
                        onblur="check()">
                 <span id="warning">   </span>
             </div>
@@ -29,7 +30,7 @@
 
 
         <div class="form-group">
-            <label for="inputConfirm3" class="col-md-4 control-label">Gender</label>
+            <label for="inputConfirm3" class="col-md-4 control-label">New Gender</label>
             <div class="col-md-4">
                 <label class="radio-inline">
                     <input type="radio" name="gender" id="inlineRadio1" value="true"> Male
@@ -40,15 +41,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputNickname3" class="col-md-4 control-label">Alias</label>
+            <label for="inputNickname3" class="col-md-4 control-label">New Alias</label>
             <div class="col-md-4">
-                <input name="alias" type="name" class="form-control" id="inputNickname3" placeholder="Alias">
+                <input name="alias" type="name" class="form-control" id="inputNickname3" placeholder="New Alias">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-md-4 control-label">Email</label>
+            <label for="inputEmail3" class="col-md-4 control-label">New Email</label>
             <div class="col-md-4">
-                <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="New Email">
             </div>
         </div>
 
