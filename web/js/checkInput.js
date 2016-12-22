@@ -95,19 +95,16 @@ function isUsername( username ){
     if( /^\d.*$/.test( username ) ){
         return 1;
     }
+    if(! /^.{6,20}$/.test( username ) ){
+        return 2;
+    }
     if(! /^[\w_]*$/.test( username ) ){
         return 3;
     }
     if(! /^([a-z]|[A-Z])[\w_]{5,19}$/.test( username ) ){
         return 4;
     }
-    if(! /^.{6,20}$/.test( username ) ){
-        return 2;
-    }
-    if(!sendRequest(username)){
-        return 5;
-    }
-
+    sendRequest(username);
     return 0;
 }
 
@@ -134,7 +131,7 @@ function checkEmail()
     var id = document.getElementById("inputEmail3");
     var email = id.value;
 
-    var expr = /^([0-9]|[a-z])+@([0-9]|[a-z])+(\.[c][o][m])$/i;
+    var expr = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
     if (!expr.test(email)) {
         document.getElementById("warning5").innerHTML = "输入的邮箱格式有误";
         emailError=true;
@@ -202,12 +199,14 @@ function sendRequest(){
      $.ajax(settings).done(function (response) {
      var obj=eval(response);
      if(obj==true){
-     document.getElementById("warning3").innerHTML=" ";
-         return true;
+         document.getElementById("warning3").innerHTML=" ";
+         userNameError=false;
+         checkForButton();
      }
      else{
-     document.getElementById("warning3").innerHTML="该用户名已被占用";
-         return false;
+        document.getElementById("warning3").innerHTML="该用户名已被占用";
+         userNameError=true;
+         checkForButton();
      }
      });
 }

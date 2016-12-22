@@ -59,7 +59,7 @@ function checkEmail()
     var id = document.getElementById("inputEmail3");
     var email = id.value;
 
-    var expr = /^([0-9]|[a-z])+@([0-9]|[a-z])+(\.[c][o][m])$/i;
+    var expr = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
     if (email.length>0 && !expr.test(email)) {
         document.getElementById("warning5").innerHTML = "输入的邮箱格式有误";
         emailError=true;
