@@ -86,6 +86,7 @@
       "image": "default.png",
       "hidden": false,
       "name": "Begin",
+      "bonus": 5,
       "description": "Enjoy with GoCheer!",
       "id": 1
     }
