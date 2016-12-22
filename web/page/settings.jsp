@@ -27,6 +27,8 @@
             <div class="col-md-4">
                 <input type="password" class="form-control" id="inputConfirm3" placeholder="Confirm New Password"
                        onblur="check()">
+            </div>
+            <div class="col-md-4 warn">
                 <span id="warning"></span>
             </div>
         </div>
