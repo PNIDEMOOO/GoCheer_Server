@@ -80,7 +80,9 @@ public class NewRecordServlet extends HttpServlet {
                 array.add(a.JSONInfo());
                 user.setScore(user.getScore()+a.getScore());
                 // 发送邮件
-                SendMail.SendCongratulations(user, a);
+                if(user.getEmail()!=null && !user.getEmail().isEmpty()){
+                    SendMail.SendCongratulations(user, a);
+                }
             }
             json.put("achievement",array);
             user.setScoresum(user.getScoresum()+newAchievement.size());

@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <h1>GoCheer</h1>
-                <p>一个智障的划词插件</p>
+                <h1>GoCheer 枸杞</h1>
+                <p>一个有成就系统的划词插件</p>
             </div>
             <div class="col-md-3">
                 <address>
