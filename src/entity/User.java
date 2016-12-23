@@ -9,7 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -106,7 +108,7 @@ public class User implements JSONable {
             switch (a.getType()){
                 // 查询次数达到指定数量
                 case "wordsum":
-                    if(wordSumAch(a)){
+                    if(this.wordsum >= Integer.parseInt(a.getCondition())){
                         newAchievements.add(a.getId());
                     }
                     break;
@@ -119,10 +121,10 @@ public class User implements JSONable {
                     break;
                 //在特定的星期几刷词获得成就
                 case "day":
-                    if(!dayDone&&newRecord!=null)
+                    if(!dayDone)
                     {
                         if(dayOfWeek==null){
-                            dayOfWeek=newRecord.getDatetime().toLocalDateTime().getDayOfWeek().toString();
+                            dayOfWeek = LocalDate.now().getDayOfWeek().toString();
                         }
                         if(dayOfWeek.equals(a.getCondition())){
                             newAchievements.add(a.getId());
@@ -132,10 +134,10 @@ public class User implements JSONable {
                     break;
                 //在特定的日期刷词获得成就，一月一号在record的condition中存为0101
                 case "date":
-                    if(!dateDone&&newRecord!=null)
+                    if(!dateDone)
                     {
-                        if(month==-1) month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
-                        if(day==-1) day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
+                        if(month==-1) month=LocalDate.now().getMonthValue();
+                        if(day==-1) day=LocalDate.now().getDayOfMonth();
                         int m=Integer.parseInt(a.getCondition().substring(0,2));
                         int d=Integer.parseInt(a.getCondition().substring(2,4));
                         if(month==m&&day==d){
@@ -146,9 +148,9 @@ public class User implements JSONable {
                     break;
                 //在特定的时间点刷词获得成就
                 case "time":
-                    if(!timeDone && newRecord!=null)
+                    if(!timeDone)
                     {
-                        if(hour==-1) hour = newRecord.getDatetime().toLocalDateTime().getHour();
+                        if(hour==-1) hour = LocalTime.now().getHour();
                         if( hour==Integer.parseInt(a.getCondition())) {
                             newAchievements.add(a.getId());
                             timeDone = true;
@@ -194,54 +196,42 @@ public class User implements JSONable {
                     break;
                 // 在特定的星期几的某个时刻划词获得成就
                 case "day & time":
-                    if(newRecord!=null)
-                    {
                         if(dayOfWeek==null){
-                            dayOfWeek=newRecord.getDatetime().toLocalDateTime().getDayOfWeek().toString();
+                            dayOfWeek=LocalDate.now().getDayOfWeek().toString();
                         }
-                        if(hour==-1) hour=newRecord.getDatetime().toLocalDateTime().getHour();
+                        if(hour==-1) hour=LocalTime.now().getHour();
 
                         if(dayOfWeek.equals(a.getCondition()) && hour==Integer.parseInt(a.getCondition2()))
                             newAchievements.add(a.getId());
-                    }
                     break;
                 // 在特定的日期划到了一定量的词获得成就
                 case "date & wordsum":
-                    if(newRecord!=null)
-                    {
-                        if(month==-1) month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
-                        if(day==-1) day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
+                        if(month==-1) LocalDate.now().getMonthValue();
+                        if(day==-1) day=LocalDate.now().getDayOfMonth();
                         int m=Integer.parseInt(a.getCondition().substring(0,2));
                         int d=Integer.parseInt(a.getCondition().substring(2,4));
                         int sum=Integer.parseInt(a.getCondition2());
                         if(month==m&&day==d&&this.wordsum >=sum)
                             newAchievements.add(a.getId());
-                    }
                     break;
 //                //在某个时刻划到了一定量的词获得成就
                 case "time & wordsum":
-                    if(newRecord!=null)
-                    {
-                        if(hour==-1) hour=newRecord.getDatetime().toLocalDateTime().getHour();
-                        int sum=Integer.parseInt(a.getCondition2());
-                        if(hour==Integer.parseInt(a.getCondition())&&this.wordsum >=sum)
+                        if(hour==-1) hour=LocalTime.now().getHour();
+                        int summ=Integer.parseInt(a.getCondition2());
+                        if(hour==Integer.parseInt(a.getCondition())&&this.wordsum >=summ)
                         {
                             newAchievements.add(a.getId());
                         }
-                    }
                     break;
 //                //在特定的日期时间划词获得了成就
                 case "date & time":
-                    if(newRecord!=null)
-                    {
-                        if(month==-1) month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
-                        if(day==-1) day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
-                        int m=Integer.parseInt(a.getCondition().substring(0,2));
-                        int d=Integer.parseInt(a.getCondition().substring(2,4));
+                        if(month==-1) month=LocalDate.now().getMonthValue();
+                        if(day==-1) day=LocalDate.now().getDayOfMonth();
+                        int m1=Integer.parseInt(a.getCondition().substring(0,2));
+                        int d1=Integer.parseInt(a.getCondition().substring(2,4));
                         if(hour==-1) hour=newRecord.getDatetime().toLocalDateTime().getHour();
-                        if(month==m&&day==d&&hour==Integer.parseInt(a.getCondition2()))
+                        if(month==m1&&day==d1&&hour==Integer.parseInt(a.getCondition2()))
                             newAchievements.add(a.getId());
-                    }
                     break;
 //                //在特定的日子刷到了特定的词语获得成就
                 case "date & specific word":
@@ -249,10 +239,10 @@ public class User implements JSONable {
                     {
                         if(month==-1) month=newRecord.getDatetime().toLocalDateTime().getMonthValue();
                         if(day==-1) day=newRecord.getDatetime().toLocalDateTime().getDayOfMonth();
-                        int m=Integer.parseInt(a.getCondition().substring(0,2));
-                        int d=Integer.parseInt(a.getCondition().substring(2,4));
+                        int m2=Integer.parseInt(a.getCondition().substring(0,2));
+                        int d2=Integer.parseInt(a.getCondition().substring(2,4));
 
-                        if(month==m&&day==d&&newRecord.getWord().equals(a.getCondition2()))
+                        if(month==m2&&day==d2&&newRecord.getWord().equals(a.getCondition2()))
                             newAchievements.add(a.getId());
                     }
                     break;
@@ -261,14 +251,6 @@ public class User implements JSONable {
             }
         }
         return newAchievements;
-    }
-
-    private boolean wordSumAch(Achievement a){
-        return(wordsum >= Integer.parseInt(a.getCondition()));
-    }
-
-    private boolean specifiicWordAch(Achievement a, Record newRecord){
-        return (newRecord!=null&&newRecord.getWord().equals(a.getCondition()));
     }
 
     @Id
