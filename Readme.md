@@ -153,7 +153,7 @@
 - 示例代码  
     - 新建记录  
 
-			RecordDAO.getInstance().save(new Record("angry","江泽民"));
+			RecordDAO.getInstance().save(new Record("hello","Alice"));
     
     - 查询记录
 
