@@ -54,59 +54,59 @@
 - Please go to 
 [http://gocheer.donggu.me](http://gocheer.donggu.me) and download `GoCheer.crx`.  
 
-	![](UMLDiagram\1.png)  
+	![](UMLDiagram/1.png)  
 
 - Open `chrome://extensions/` and drag the `GoCheer.crx` into it.  
 
-	![](UMLDiagram\22.png)  
+	![](UMLDiagram/22.png)  
 
 	> P.S. If you find the GoCheer Chrome extension can not be enabled properly, you can try to clear your browsing data, reboot your brower and install again.  
 
 - If you have installed the plugin correctly, you will see this icon at the upper right corner of Chrome.  
 	
-	![](UMLDiagram\3.png)  
+	![](UMLDiagram/3.png)  
 
 - Click the GoCheer icon and you will see the Login Page.  
 	
-	![](UMLDiagram\4.png)  
+	![](UMLDiagram/4.png)  
 
 - Click the "Sign up" button and go to the Sign up Page.  
 	
-	![](UMLDiagram\5.png)  
+	![](UMLDiagram/5.png)  
 
 - Fill in your information and submit.  
 	
-	![](UMLDiagram\6.png)  
+	![](UMLDiagram/6.png)  
 
 - After registering successfully, you will jump to your Home Page automatically.  
 	
-	![](UMLDiagram\7.png)  
+	![](UMLDiagram/7.png)  
 
 - Then you can select a word.  
 	
-	![](UMLDiagram\8.png)  
+	![](UMLDiagram/8.png)  
 
 - If you get a new achievement, you will receive an email from GoCheer.  
 	
-	![](UMLDiagram\9.png)  
+	![](UMLDiagram/9.png)  
 
 - You can go to your Home Page and see your history and achievements. 
 	
-	![](UMLDiagram\10.png)  
+	![](UMLDiagram/10.png)  
 
-	![](UMLDiagram\11.png)  
+	![](UMLDiagram/11.png)  
 
 - You can also change your information in your Home Page.  
 	
-	![](UMLDiagram\12.png)  
+	![](UMLDiagram/12.png)  
 
 - Click the "Leaderboard" and you can see the score ranking of all GoCheer users.  
 	
-	![](UMLDiagram\13.png)  
+	![](UMLDiagram/13.png)  
 
 - Click "my position" and you can go to your position directly.  
 	
-	![](UMLDiagram\14.png)  
+	![](UMLDiagram/14.png)  
 
 ## System Deployment and Configurations
 ![](UMLDiagram/DeploymentDiagram.png)  
