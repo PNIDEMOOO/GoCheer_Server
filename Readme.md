@@ -1,8 +1,9 @@
 # GoCheer: selected word translator with achievement system
 
 >1452764 何冬怡　15502131257　me@donggu.me  
-1452685 陈冉冉  
 1452769 张鸿羽  
+1350588 胡贝妮
+1452661 冯⾬晴
 
 ## System Functionalities
 - **Download GoCheer**  
